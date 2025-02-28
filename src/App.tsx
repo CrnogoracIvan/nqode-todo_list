@@ -14,7 +14,7 @@ function App() {
 
     const handleNewItemClick = () => {
         setActiveForm('NEW')
-
+        setItemForEdit(null)
     }
 
     const handleItemClick = (item: IListItem) => {
@@ -34,7 +34,6 @@ function App() {
         const editItemIndex = newList.findIndex((i) => i.id === item.id);
         newList.splice(editItemIndex, 1, item);
 
-        setItemForEdit(newList[editItemIndex + 1]);
         setList(newList);
     }
 
@@ -44,6 +43,11 @@ function App() {
         newList.splice(deleteItemIndex, 1);
 
         setList(newList);
+        const nextItemIndexForDelete = deleteItemIndex === newList.length ? newList.length - 1 : deleteItemIndex;
+        if (!newList.length) {
+            setActiveForm('NONE');
+        }
+        setItemForEdit(newList[nextItemIndexForDelete]);
     }
 
     const renderLeftSideTitle = () => (
