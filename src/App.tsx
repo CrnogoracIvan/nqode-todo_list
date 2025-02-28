@@ -93,10 +93,11 @@ function App() {
     const renderList = () => {
         const numberOfTasks = filteredList.length > 0 ? ` - ${filteredList.length}` : '';
         const title = `${capitalizeFirstLetter(filteredBy)} tasks ${numberOfTasks}`;
+        const addNewItemDisabled = filteredBy === 'COMPLETED';
         return (
             <>
                 <h1 className='text-5xl font-bold mb-6'>{title}</h1>
-                <NewItemButton onClick={handleNewItemClick}/>
+                <NewItemButton disabled={addNewItemDisabled} onClick={handleNewItemClick}/>
                 <ItemList onItemClick={handleItemClick} items={filteredList} selectedItem={itemForEdit}/>
             </>
         )
