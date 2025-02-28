@@ -14,7 +14,7 @@ export const NewItemButton = ({disabled, onClick}: IProps) => {
         >
             <BiPlus/>
             <p className={'ml-1'}>
-                Add new item
+                Add new task
             </p>
         </button>
     )

@@ -6,7 +6,7 @@ import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
 import {capitalizeFirstLetter} from "./utils.ts";
-
+import {LuSquareMousePointer} from "react-icons/lu";
 
 type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
 
@@ -19,6 +19,8 @@ function App() {
 
     const handleMenuItemClick = (menuItem: TMenuItem) => {
         setFilteredBy(menuItem);
+        setActiveForm('NONE');
+        setItemForEdit(undefined);
     }
 
     const handleNewItemClick = () => {
@@ -125,7 +127,12 @@ function App() {
                 case 'NONE':
                 default:
                     return (
-                        <p>No item selected</p>
+                        <div className={'flex flex-col items-center justify-center h-full'}>
+                            <LuSquareMousePointer className={'text-8xl mb-4'}/>
+                            <p>No task selected</p>
+
+                        </div>
+
                     )
             }
         }
