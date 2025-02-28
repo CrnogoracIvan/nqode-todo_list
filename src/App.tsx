@@ -5,6 +5,7 @@ import {IListItem, TMenuItem} from "./types.ts";
 import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
+import {capitalizeFirstLetter} from "./utils.ts";
 
 
 type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
@@ -14,7 +15,7 @@ function App() {
     const [list, setList] = useState<IListItem[]>([]);
     const [filteredBy, setFilteredBy] = useState<TMenuItem>('ALL');
     const [filteredList, setFilteredList] = useState<IListItem[]>([]);
-    const [itemForEdit, setItemForEdit] = useState<IListItem | null>(null);
+    const [itemForEdit, setItemForEdit] = useState<IListItem | undefined>(undefined);
 
     const handleMenuItemClick = (menuItem: TMenuItem) => {
         setFilteredBy(menuItem);
@@ -22,7 +23,7 @@ function App() {
 
     const handleNewItemClick = () => {
         setActiveForm('NEW')
-        setItemForEdit(null)
+        setItemForEdit(undefined)
     }
 
     const handleItemClick = (item: IListItem) => {
@@ -90,9 +91,11 @@ function App() {
     }, [filteredBy, list]);
 
     const renderList = () => {
+        const numberOfTasks = filteredList.length > 0 ? ` - ${filteredList.length}` : '';
+        const title = `${capitalizeFirstLetter(filteredBy)} tasks ${numberOfTasks}`;
         return (
             <>
-                <h1 className='text-7xl font-bold mb-6'>Today</h1>
+                <h1 className='text-5xl font-bold mb-6'>{title}</h1>
                 <NewItemButton onClick={handleNewItemClick}/>
                 <ItemList onItemClick={handleItemClick} items={filteredList} selectedItem={itemForEdit}/>
             </>
