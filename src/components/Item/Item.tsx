@@ -4,7 +4,7 @@ import {IListItem} from "../../types.ts";
 interface IProps {
     item: IListItem;
     onClick: (item: IListItem) => void;
-    selectedItemId: string;
+    selectedItemId: string | undefined;
 }
 
 export const Item = ({item, onClick, selectedItemId}: IProps) => {

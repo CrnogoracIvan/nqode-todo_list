@@ -4,7 +4,7 @@ import {Item} from "../Item/Item.tsx";
 interface IProps {
     items: IListItem[]
     onItemClick: (item: IListItem) => void;
-    selectedItem: IListItem;
+    selectedItem: IListItem | undefined;
 }
 
 export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {

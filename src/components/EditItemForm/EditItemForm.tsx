@@ -3,14 +3,14 @@ import {IListItem} from "../../types.ts";
 
 
 interface IProps {
-    item: IListItem | null;
+    item: IListItem;
     onSubmitChanges: (item: IListItem) => void;
     onDelete: (item: IListItem) => void;
-    onConfirm?: (item: IListItem) => void;
+    onConfirm: (item: IListItem) => void;
 }
 
 
-export const EditItemForm = ({item, onSubmitChanges, onDelete}: IProps) => {
+export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProps) => {
     const [id, setId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -46,6 +46,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete}: IProps) => {
                 id,
                 title,
                 description,
+                status: item.status,
             })}
         >
             Save changes
@@ -68,12 +69,29 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete}: IProps) => {
         )
     }
 
+    const renderMarkCompletedButton = () => {
+        if (!item) {
+            return null;
+        }
+        return (
+            <button
+                className="mt-2 rounded-md bg-green-500 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-48"
+                type="button"
+                disabled={disableSubmit}
+                onClick={() => onConfirm(item)}
+            >
+                Mark as completed
+            </button>
+        )
+    }
+
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>
             {renderInput('Title', title, setTitle)}
             {renderInput('Description', description, setDescription)}
             <div className="flex flex-1 flex-col items-end">
                 {renderConfirmChangesButton()}
+                {renderMarkCompletedButton()}
                 {renderDeleteItemButton()}
             </div>
         </div>

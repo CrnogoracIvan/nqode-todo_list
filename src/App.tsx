@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {NewItemButton} from "./components/NewItemButton/NewItemButton.tsx";
 import {NewItemForm} from "./components/NewItemForm/NewItemForm.tsx";
 import {IListItem} from "./types.ts";
@@ -50,6 +50,22 @@ function App() {
         setItemForEdit(newList[nextItemIndexForDelete]);
     }
 
+    const handleItemCompleted = (item: IListItem) => {
+        const newList = [...list];
+        const completedItemIndex = newList.findIndex((i) => i.id === item.id);
+        const updatedItem: IListItem = {
+            ...item,
+            status: 'COMPLETED'
+        }
+        newList.splice(completedItemIndex, 1, updatedItem);
+        setList(newList);
+    }
+
+
+    useEffect(() => {
+        console.log('list je: ', list)
+    }, [list])
+
     const renderLeftSideTitle = () => (
         <h1 className='text-7xl font-bold mb-6'>Today</h1>
     )
@@ -61,11 +77,15 @@ function App() {
                     <NewItemForm onSubmit={handleSubmit}/>
                 )
             case "EDIT":
+                if (!itemForEdit) {
+                    return null
+                }
                 return (
                     <EditItemForm
                         item={itemForEdit}
                         onSubmitChanges={handleSubmitEdit}
                         onDelete={handleItemDelete}
+                        onConfirm={handleItemCompleted}
                     />
                 )
             case 'NONE':

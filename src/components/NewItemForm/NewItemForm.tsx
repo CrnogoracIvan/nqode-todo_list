@@ -26,6 +26,7 @@ export const NewItemForm = ({onSubmit}: IProps) => {
             id,
             title,
             description,
+            status: 'ACTIVE'
         })
         resetForm()
     }
