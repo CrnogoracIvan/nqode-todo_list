@@ -4,6 +4,8 @@ import {NewItemForm} from "./components/NewItemForm/NewItemForm.tsx";
 import {IListItem} from "./types.ts";
 import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
+import {RiCheckboxMultipleBlankLine, RiCheckboxMultipleFill, RiCheckboxMultipleLine} from "react-icons/ri";
+
 
 type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
 
@@ -106,10 +108,48 @@ function App() {
         }
     }
 
+    const renderMenu = () => {
+        const menuItems = [
+            {
+                title: 'All', onClick: () => console.log('all'), icon: <RiCheckboxMultipleFill/>
+
+            },
+            {
+                title: 'Active', onClick: () => console.log('active'), icon: <RiCheckboxMultipleBlankLine/>
+
+
+            },
+            {
+                title: 'Completed', onClick: () => console.log('completed'), icon: <RiCheckboxMultipleLine/>
+
+            },
+        ]
+
+        return (
+            <div>
+                <p className={'font-bold mb-6 text-4xl'}>Menu</p>
+                <ul>
+                    {menuItems.map((item, i) => (
+                        <li key={i} onClick={item.onClick}
+                            className={'flex flex-row cursor-pointer items-center mt-2 text-xl'}>
+                            <>
+                                {item.icon}
+                                <p className={'ml-2'}>{item.title}</p>
+                            </>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+
+    }
+
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh border-2'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
-                <div className={'w-1/5 p-6'}>Menu</div>
+                <div className={'w-1/5 p-6'}>
+                    {renderMenu()}
+                </div>
                 <div className={'w-2/5 p-6 bg-white'}>
                     {renderList()}
                 </div>
