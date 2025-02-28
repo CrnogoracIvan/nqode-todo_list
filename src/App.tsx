@@ -70,6 +70,16 @@ function App() {
         <h1 className='text-7xl font-bold mb-6'>Today</h1>
     )
 
+    const renderList = () => {
+        return (
+            <>
+                {renderLeftSideTitle()}
+                <NewItemButton onClick={handleNewItemClick}/>
+                <ItemList onItemClick={handleItemClick} items={list} selectedItem={itemForEdit}/>
+            </>
+        )
+    }
+
     const renderForm = () => {
         switch (activeForm) {
             case "NEW":
@@ -97,23 +107,17 @@ function App() {
     }
 
     return (
-        <>
-            <p className='text-3xl font-bold text-blue-600'>
-                nQode To Do List
-            </p>
-            <div className='flex flex-row justify-center w-full'>
-                <div className='flex flex-row justify-center w-1/2'>
-                    <div className={'w-1/2 pr-4'}>
-                        {renderLeftSideTitle()}
-                        <NewItemButton onClick={handleNewItemClick}/>
-                        <ItemList onItemClick={handleItemClick} items={list} selectedItem={itemForEdit}/>
-                    </div>
-                    <div className={'bg-slate-50 w-1/2 border-1 rounded-lg'}>
-                        {renderForm()}
-                    </div>
+        <div className='flex flex-row justify-center items-center w-full h-dvh border-2'>
+            <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
+                <div className={'w-1/5 p-6'}>Menu</div>
+                <div className={'w-2/5 p-6 bg-white'}>
+                    {renderList()}
+                </div>
+                <div className={'bg-slate-50 w-2/5 p-6'}>
+                    {renderForm()}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
