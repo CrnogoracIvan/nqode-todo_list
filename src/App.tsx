@@ -45,6 +45,7 @@ function App() {
         const editItemIndex = newList.findIndex((i) => i.id === item.id);
         newList.splice(editItemIndex, 1, item);
 
+        setItemForEdit(item);
         setList(newList);
     }
 
@@ -98,7 +99,7 @@ function App() {
         const addNewItemDisabled = filteredBy === 'COMPLETED';
         return (
             <>
-                <h1 className='text-5xl font-bold mb-6'>{title}</h1>
+                <h1 className='text-4xl font-bold mb-6'>{title}</h1>
                 <NewItemButton disabled={addNewItemDisabled} onClick={handleNewItemClick}/>
                 <ItemList onItemClick={handleItemClick} items={filteredList} selectedItem={itemForEdit}/>
             </>
@@ -106,6 +107,7 @@ function App() {
     }
 
     const renderForm = () => {
+        const formTitle = itemForEdit ? `Task: ${itemForEdit.title}` : 'New Task';
         const getForm = () => {
             switch (activeForm) {
                 case "NEW":
@@ -130,7 +132,6 @@ function App() {
                         <div className={'flex flex-col items-center justify-center h-full'}>
                             <LuSquareMousePointer className={'text-8xl mb-4'}/>
                             <p>No task selected</p>
-
                         </div>
 
                     )
@@ -139,27 +140,18 @@ function App() {
 
         return (
             <>
-                <p className={'font-bold mb-6 text-4xl'}>Task:</p>
+                <p className={'font-bold mb-6 text-2xl'}>{formTitle}</p>
                 {getForm()}
             </>
         );
     }
 
-    const renderMenu = () => {
-        return (
-            <>
-                <p className={'font-bold mb-6 text-4xl'}>Menu</p>
-                <Menu onItemClick={handleMenuItemClick}/>
-            </>
-        )
-
-    }
 
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh border-2'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
                 <div className={'w-1/5 p-6'}>
-                    {renderMenu()}
+                    <Menu onItemClick={handleMenuItemClick}/>
                 </div>
                 <div className={'w-2/5 p-6 bg-white'}>
                     {renderList()}

@@ -40,19 +40,22 @@ export const Menu = ({onItemClick}: IProps) => {
         },
     ]
     return (
-        <ul>
-            {menuItems.map((item, i) => {
-                const activeItemStyle = item.id === activeItemId ? 'text-amber-300' : 'text-black'
-                return (
-                    <li key={i} onClick={item.onClick}
-                        className={`flex flex-row cursor-pointer items-center mt-2 text-xl hover:text-amber-500 ${activeItemStyle}`}>
-                        <>
-                            {item.icon}
-                            <p className={'ml-2'}>{item.title}</p>
-                        </>
-                    </li>
-                )
-            })}
-        </ul>
+        <>
+            <p className={'font-bold mb-6 text-2xl'}>Menu</p>
+            <ul>
+                {menuItems.map((item, i) => {
+                    const activeItemStyle = item.id === activeItemId ? 'text-amber-300' : 'text-black'
+                    return (
+                        <li key={i} onClick={item.onClick}
+                            className={`flex flex-row cursor-pointer items-center mt-2 text-xl hover:text-amber-500 ${activeItemStyle}`}>
+                            <>
+                                {item.icon}
+                                <p className={'ml-2'}>{item.title}</p>
+                            </>
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
     )
 }

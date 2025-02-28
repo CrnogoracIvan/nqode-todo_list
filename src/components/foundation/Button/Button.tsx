@@ -3,9 +3,10 @@ interface IProps {
     label: string;
     disabled?: boolean;
     onClick: () => void;
+    customClass?: string;
 }
 
-export const Button = ({label, type, disabled = false, onClick}: IProps) => {
+export const Button = ({label, type, disabled = false, onClick, customClass}: IProps) => {
     const globalStyle = 'w-48 rounded-md py-2 px-4 my-1 border border-transparent text-center text-sm text-white transition-all shadow-md active:shadow-none hover:shadow-lg'
     const disabledStyle = 'disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
     const submitStyle = ' bg-amber-300 hover:bg-amber-500'
@@ -26,7 +27,7 @@ export const Button = ({label, type, disabled = false, onClick}: IProps) => {
 
     return (
         <button
-            className={`${globalStyle} ${disabledStyle} ${getStyleByType()}`}
+            className={`${globalStyle} ${disabledStyle} ${getStyleByType()} ${customClass}`}
             type="button"
             disabled={disabled}
             onClick={onClick}

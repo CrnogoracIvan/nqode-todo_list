@@ -34,15 +34,27 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
     }, [item]);
 
 
+    const renderCompletedButton = () => {
+        if (item.status === 'COMPLETED') {
+            return null
+        }
+        return (
+            <div className={'flex flex-row w-full justify-end'}>
+                <Button type={'SUCCESS'} onClick={() => onConfirm(item)} label={'Mark as completed'}/>
+            </div>
+        )
+    }
+
     return (
-        <div className={'flex flex-1 flex-col border-1 w-full p-4'}>
+        <div className={'flex flex-1 flex-col w-full'}>
+            {renderCompletedButton()}
             <Input label={'Title'} value={title} onChangeValue={setTitle}/>
             <Input label={'Description'} value={description} onChangeValue={setDescription}
                    rows={7}/>
-            <div className="flex flex-1 flex-col items-end">
-                <Button type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)} label={'Save changes'}/>
-                <Button type={'SUCCESS'} onClick={() => onConfirm(item)} label={'Mark as completed'}/>
-                <Button type={'CANCEL'} onClick={() => onDelete(item)} label={'Delete task'}/>
+            <div className="flex flex-1 flex-row justify-center">
+                <Button customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)} label={'Delete task'}/>
+                <Button customClass={'ml-2'} type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)}
+                        label={'Save changes'}/>
             </div>
         </div>
     )
