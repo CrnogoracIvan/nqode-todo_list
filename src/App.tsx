@@ -54,12 +54,12 @@ function App() {
         const deleteItemIndex = newList.findIndex((i) => i.id === item.id);
         newList.splice(deleteItemIndex, 1);
 
-        setList(newList);
         const nextItemIndexForDelete = deleteItemIndex === newList.length ? newList.length - 1 : deleteItemIndex;
         if (!newList.length) {
             setActiveForm('NONE');
         }
         setItemForEdit(newList[nextItemIndexForDelete]);
+        setList(newList);
     }
 
     const handleItemCompleted = (item: IListItem) => {
@@ -107,7 +107,7 @@ function App() {
     }
 
     const renderForm = () => {
-        const formTitle = itemForEdit ? `Task: ${itemForEdit.title}` : 'New Task';
+        const formTitle = itemForEdit ? `Task: ${itemForEdit.title}` : 'New Task:';
         const getForm = () => {
             switch (activeForm) {
                 case "NEW":
