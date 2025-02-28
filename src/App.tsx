@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {NewItemButton} from "./components/NewItemButton/NewItemButton.tsx";
-import {Item} from "./components/Item/Item.tsx";
 import {NewItemForm} from "./components/NewItemForm/NewItemForm.tsx";
 import {IListItem} from "./types.ts";
+import {ItemList} from "./components/ItemList/ItemList.tsx";
 
 function App() {
 
@@ -23,13 +23,6 @@ function App() {
         <h1 className='text-7xl font-bold mb-6'>Today</h1>
     )
 
-    const renderItemList = (items: IListItem[]) => {
-        return items.map((item) => (
-            <Item itemName={item.title}/>
-        ))
-    }
-
-
     return (
         <>
             <p className='text-3xl font-bold text-blue-600'>
@@ -40,7 +33,7 @@ function App() {
                     <div className={'w-1/2 pr-4'}>
                         {renderLeftSideTitle()}
                         <NewItemButton onClick={handleNewItemClick}/>
-                        {renderItemList(list)}
+                        <ItemList items={list}/>
                     </div>
                     <div className={'bg-slate-50 w-1/2 border-1 rounded-lg'}>
                         {isNewItemFormVisible ? <NewItemForm onSubmit={handleSubmit}/> : <p>right side</p>}
