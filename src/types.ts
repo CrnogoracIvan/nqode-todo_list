@@ -4,3 +4,5 @@ export interface IListItem {
     description: string;
     status: 'ACTIVE' | 'COMPLETED';
 }
+
+export type TMenuItem = 'ALL' | 'ACTIVE' | 'COMPLETED';

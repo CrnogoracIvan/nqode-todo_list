@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import {NewItemButton} from "./components/NewItemButton/NewItemButton.tsx";
 import {NewItemForm} from "./components/NewItemForm/NewItemForm.tsx";
-import {IListItem} from "./types.ts";
+import {IListItem, TMenuItem} from "./types.ts";
 import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
-import {RiCheckboxMultipleBlankLine, RiCheckboxMultipleFill, RiCheckboxMultipleLine} from "react-icons/ri";
+import {Menu} from "./components/Menu/Menu.tsx";
 
 
 type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
@@ -12,7 +12,13 @@ type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
 function App() {
     const [activeForm, setActiveForm] = useState<TActiveForm>('NONE');
     const [list, setList] = useState<IListItem[]>([]);
+    const [filteredBy, setFilteredBy] = useState<TMenuItem>('ALL');
+    const [filteredList, setFilteredList] = useState<IListItem[]>([]);
     const [itemForEdit, setItemForEdit] = useState<IListItem | null>(null);
+
+    const handleMenuItemClick = (menuItem: TMenuItem) => {
+        setFilteredBy(menuItem);
+    }
 
     const handleNewItemClick = () => {
         setActiveForm('NEW')
@@ -63,83 +69,77 @@ function App() {
         setList(newList);
     }
 
-
     useEffect(() => {
-        console.log('list je: ', list)
-    }, [list])
-
-    const renderLeftSideTitle = () => (
-        <h1 className='text-7xl font-bold mb-6'>Today</h1>
-    )
+        switch (filteredBy) {
+            case "ACTIVE": {
+                const f = list.filter((i) => i.status === "ACTIVE");
+                setFilteredList(f);
+                return;
+            }
+            case "COMPLETED": {
+                const f = list.filter((i) => i.status === "COMPLETED");
+                setFilteredList(f);
+                return;
+            }
+            case 'ALL':
+            default: {
+                setFilteredList(list);
+                return;
+            }
+        }
+    }, [filteredBy, list]);
 
     const renderList = () => {
         return (
             <>
-                {renderLeftSideTitle()}
+                <h1 className='text-7xl font-bold mb-6'>Today</h1>
                 <NewItemButton onClick={handleNewItemClick}/>
-                <ItemList onItemClick={handleItemClick} items={list} selectedItem={itemForEdit}/>
+                <ItemList onItemClick={handleItemClick} items={filteredList} selectedItem={itemForEdit}/>
             </>
         )
     }
 
     const renderForm = () => {
-        switch (activeForm) {
-            case "NEW":
-                return (
-                    <NewItemForm onSubmit={handleSubmit}/>
-                )
-            case "EDIT":
-                if (!itemForEdit) {
-                    return null
-                }
-                return (
-                    <EditItemForm
-                        item={itemForEdit}
-                        onSubmitChanges={handleSubmitEdit}
-                        onDelete={handleItemDelete}
-                        onConfirm={handleItemCompleted}
-                    />
-                )
-            case 'NONE':
-            default:
-                return (
-                    <p>No item selected</p>
-                )
+        const getForm = () => {
+            switch (activeForm) {
+                case "NEW":
+                    return (
+                        <NewItemForm onSubmit={handleSubmit}/>
+                    )
+                case "EDIT":
+                    if (!itemForEdit) {
+                        return null
+                    }
+                    return (
+                        <EditItemForm
+                            item={itemForEdit}
+                            onSubmitChanges={handleSubmitEdit}
+                            onDelete={handleItemDelete}
+                            onConfirm={handleItemCompleted}
+                        />
+                    )
+                case 'NONE':
+                default:
+                    return (
+                        <p>No item selected</p>
+                    )
+            }
         }
+
+        return (
+            <>
+                <p className={'font-bold mb-6 text-4xl'}>Task:</p>
+                {getForm()}
+            </>
+        );
     }
 
     const renderMenu = () => {
-        const menuItems = [
-            {
-                title: 'All', onClick: () => console.log('all'), icon: <RiCheckboxMultipleFill/>
-
-            },
-            {
-                title: 'Active', onClick: () => console.log('active'), icon: <RiCheckboxMultipleBlankLine/>
-
-
-            },
-            {
-                title: 'Completed', onClick: () => console.log('completed'), icon: <RiCheckboxMultipleLine/>
-
-            },
-        ]
-
         return (
-            <div>
+            <>
                 <p className={'font-bold mb-6 text-4xl'}>Menu</p>
-                <ul>
-                    {menuItems.map((item, i) => (
-                        <li key={i} onClick={item.onClick}
-                            className={'flex flex-row cursor-pointer items-center mt-2 text-xl'}>
-                            <>
-                                {item.icon}
-                                <p className={'ml-2'}>{item.title}</p>
-                            </>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                <Menu onItemClick={handleMenuItemClick}/>
+            </>
         )
 
     }
