@@ -1,17 +1,23 @@
 import {BiChevronRight} from "react-icons/bi";
+import {IListItem} from "../../types.ts";
 
 interface IProps {
-    itemName: string;
-    onClick?: () => void;
+    item: IListItem;
+    onClick: (item: IListItem) => void;
 }
 
-export const Item = ({itemName}: IProps) => {
+export const Item = ({item, onClick}: IProps) => {
     return (
-        <div className={'flex flex-row cursor-pointer items-center justify-between mt-4 py-2 border-b hover:border-amber-300'} onClick={()=> {console.log('clicked')}}>
+        <div
+            className={'flex flex-row cursor-pointer items-center justify-between mt-4 py-2 border-b hover:border-amber-300'}
+            onClick={() => {
+                onClick(item)
+            }}
+        >
             <p className={'ml-1'}>
-                {itemName}
+                {item.title}
             </p>
-            <BiChevronRight />
+            <BiChevronRight/>
         </div>
     )
 }

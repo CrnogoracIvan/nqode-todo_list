@@ -1,34 +1,30 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {IListItem} from "../../types.ts";
-import {v4 as uuidv4} from 'uuid';
 
 
 interface IProps {
-    onSubmit: (item: IListItem) => void;
+    item: IListItem | null;
+    onSubmitChanges: (item: IListItem) => void;
+    onDelete?: (item: IListItem) => void;
+    onConfirm?: (item: IListItem) => void;
 }
 
 
-export const NewItemForm = ({onSubmit}: IProps) => {
-
+export const EditItemForm = ({item, onSubmitChanges}: IProps) => {
+    const [id, setId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
-    const disableSubmit = title.length === 0 || description.length === 0;
+    useEffect(() => {
+        if (!item) {
+            return;
+        }
+        setId(item.id);
+        setTitle(item.title);
+        setDescription(item.description);
+    }, [item]);
 
-    const resetForm = () => {
-        setTitle('');
-        setDescription('');
-    }
-
-    const handleSubmit = () => {
-        const id = uuidv4();
-        onSubmit({
-            id,
-            title,
-            description,
-        })
-        resetForm()
-    }
+    const disableSubmit = title?.length === 0 || description.length === 0;
 
     const renderInput = (title: string, value: string, onChangeValue: (newValue: string) => void) => (
         <div className="w-full  min-w-[200px] py-2">
@@ -46,9 +42,13 @@ export const NewItemForm = ({onSubmit}: IProps) => {
             className="rounded-md bg-amber-300 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-amber-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-48"
             type="button"
             disabled={disableSubmit}
-            onClick={handleSubmit}
+            onClick={() => onSubmitChanges({
+                id,
+                title,
+                description,
+            })}
         >
-            Save item
+            Save changes
         </button>
     )
 
