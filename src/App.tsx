@@ -5,18 +5,20 @@ import {IListItem} from "./types.ts";
 import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
 
-function App() {
+type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
 
-    const [isNewItemFormVisible, setIsNewItemFormVisible] = useState<boolean>(false);
+function App() {
+    const [activeForm, setActiveForm] = useState<TActiveForm>('NONE');
     const [list, setList] = useState<IListItem[]>([]);
     const [itemForEdit, setItemForEdit] = useState<IListItem | null>(null);
 
     const handleNewItemClick = () => {
-        setIsNewItemFormVisible(true);
+        setActiveForm('NEW')
+
     }
 
     const handleItemClick = (item: IListItem) => {
-        setIsNewItemFormVisible(false);
+        setActiveForm('EDIT')
         setItemForEdit(item);
     }
 
@@ -32,12 +34,43 @@ function App() {
         const editItemIndex = newList.findIndex((i) => i.id === item.id);
         newList.splice(editItemIndex, 1, item);
 
+        setItemForEdit(newList[editItemIndex + 1]);
+        setList(newList);
+    }
+
+    const handleItemDelete = (item: IListItem) => {
+        const newList = [...list];
+        const deleteItemIndex = newList.findIndex((i) => i.id === item.id);
+        newList.splice(deleteItemIndex, 1);
+
         setList(newList);
     }
 
     const renderLeftSideTitle = () => (
         <h1 className='text-7xl font-bold mb-6'>Today</h1>
     )
+
+    const renderForm = () => {
+        switch (activeForm) {
+            case "NEW":
+                return (
+                    <NewItemForm onSubmit={handleSubmit}/>
+                )
+            case "EDIT":
+                return (
+                    <EditItemForm
+                        item={itemForEdit}
+                        onSubmitChanges={handleSubmitEdit}
+                        onDelete={handleItemDelete}
+                    />
+                )
+            case 'NONE':
+            default:
+                return (
+                    <p>No item selected</p>
+                )
+        }
+    }
 
     return (
         <>
@@ -52,10 +85,7 @@ function App() {
                         <ItemList onItemClick={handleItemClick} items={list}/>
                     </div>
                     <div className={'bg-slate-50 w-1/2 border-1 rounded-lg'}>
-                        {isNewItemFormVisible ?
-                            <NewItemForm onSubmit={handleSubmit}/>
-                            :
-                            <EditItemForm item={itemForEdit} onSubmitChanges={handleSubmitEdit}/>}
+                        {renderForm()}
                     </div>
                 </div>
             </div>

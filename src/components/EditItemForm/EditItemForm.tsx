@@ -5,12 +5,12 @@ import {IListItem} from "../../types.ts";
 interface IProps {
     item: IListItem | null;
     onSubmitChanges: (item: IListItem) => void;
-    onDelete?: (item: IListItem) => void;
+    onDelete: (item: IListItem) => void;
     onConfirm?: (item: IListItem) => void;
 }
 
 
-export const EditItemForm = ({item, onSubmitChanges}: IProps) => {
+export const EditItemForm = ({item, onSubmitChanges, onDelete}: IProps) => {
     const [id, setId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -37,9 +37,9 @@ export const EditItemForm = ({item, onSubmitChanges}: IProps) => {
         </div>
     )
 
-    const renderConfirmButton = () => (
+    const renderConfirmChangesButton = () => (
         <button
-            className="rounded-md bg-amber-300 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-amber-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-48"
+            className="mt-2 rounded-md bg-amber-300 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-amber-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-48"
             type="button"
             disabled={disableSubmit}
             onClick={() => onSubmitChanges({
@@ -52,12 +52,29 @@ export const EditItemForm = ({item, onSubmitChanges}: IProps) => {
         </button>
     )
 
+    const renderDeleteItemButton = () => {
+        if (!item) {
+            return null;
+        }
+        return (
+            <button
+                className="mt-2 rounded-md bg-red-500 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none w-48"
+                type="button"
+                disabled={disableSubmit}
+                onClick={() => onDelete(item)}
+            >
+                Delete item
+            </button>
+        )
+    }
+
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>
             {renderInput('Title', title, setTitle)}
             {renderInput('Description', description, setDescription)}
-            <div className="flex flex-1 justify-end">
-                {renderConfirmButton()}
+            <div className="flex flex-1 flex-col items-end">
+                {renderConfirmChangesButton()}
+                {renderDeleteItemButton()}
             </div>
         </div>
     )
