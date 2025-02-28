@@ -82,7 +82,7 @@ function App() {
                     <div className={'w-1/2 pr-4'}>
                         {renderLeftSideTitle()}
                         <NewItemButton onClick={handleNewItemClick}/>
-                        <ItemList onItemClick={handleItemClick} items={list}/>
+                        <ItemList onItemClick={handleItemClick} items={list} selectedItem={itemForEdit}/>
                     </div>
                     <div className={'bg-slate-50 w-1/2 border-1 rounded-lg'}>
                         {renderForm()}
