@@ -1,14 +1,11 @@
 import {useEffect, useState} from "react";
 import {NewItemButton} from "./components/list/NewItemButton/NewItemButton.tsx";
-import {NewItemForm} from "./components/form/NewItemForm/NewItemForm.tsx";
-import {IListItem, TMenuItem} from "./types.ts";
+import {IListItem, TActiveForm, TMenuItem} from "./types.ts";
 import {ItemList} from "./components/list/ItemList/ItemList.tsx";
-import {EditItemForm} from "./components/form/EditItemForm/EditItemForm.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
 import {capitalizeFirstLetter, localStorageGetList, localStorageSetList} from "./utils.ts";
-import {LuSquareMousePointer} from "react-icons/lu";
+import {FormWrapper} from "./components/form/FormWrapper/FormWrapper.tsx";
 
-type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
 
 function App() {
     const [activeForm, setActiveForm] = useState<TActiveForm>('NONE');
@@ -120,47 +117,6 @@ function App() {
         )
     }
 
-    const renderForm = () => {
-        const formTitle = itemForEdit ? `Task: ${itemForEdit.title}` : 'New Task:';
-        const getForm = () => {
-            switch (activeForm) {
-                case "NEW":
-                    return (
-                        <NewItemForm onSubmit={handleSubmit}/>
-                    )
-                case "EDIT":
-                    if (!itemForEdit) {
-                        return null
-                    }
-                    return (
-                        <EditItemForm
-                            item={itemForEdit}
-                            onSubmitChanges={handleSubmitEdit}
-                            onDelete={handleItemDelete}
-                            onConfirm={handleItemCompleted}
-                        />
-                    )
-                case 'NONE':
-                default:
-                    return (
-                        <div className={'flex flex-col items-center justify-center h-full'}>
-                            <LuSquareMousePointer className={'text-8xl mb-4'}/>
-                            <p>No task selected</p>
-                        </div>
-
-                    )
-            }
-        }
-
-        return (
-            <>
-                <p className={'font-bold mb-6 text-2xl'}>{formTitle}</p>
-                {getForm()}
-            </>
-        );
-    }
-
-
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
@@ -171,7 +127,13 @@ function App() {
                     {renderList()}
                 </div>
                 <div className={'bg-slate-50 w-2/6 p-6'}>
-                    {renderForm()}
+                    <FormWrapper
+                        itemForEdit={itemForEdit}
+                        activeForm={activeForm}
+                        handleSubmit={handleSubmit}
+                        handleSubmitEdit={handleSubmitEdit}
+                        handleItemDelete={handleItemDelete}
+                        handleItemCompleted={handleItemCompleted}/>
                 </div>
             </div>
         </div>

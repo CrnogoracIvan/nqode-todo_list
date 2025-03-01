@@ -47,7 +47,7 @@ export const Menu = ({onItemClick}: IProps) => {
                     const activeItemStyle = item.id === activeItemId ? 'text-amber-300' : 'text-black'
                     return (
                         <li key={i} onClick={item.onClick}
-                            className={`flex flex-row cursor-pointer items-center mt-2 text-xl hover:text-amber-500 ${activeItemStyle}`}>
+                            className={`flex flex-row cursor-pointer items-center mt-4 text-xl hover:text-amber-500 ${activeItemStyle}`}>
                             <>
                                 {item.icon}
                                 <p className={'ml-2'}>{item.title}</p>

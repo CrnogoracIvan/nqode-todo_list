@@ -7,3 +7,4 @@ export interface IListItem {
 }
 
 export type TMenuItem = 'ALL' | 'ACTIVE' | 'COMPLETED';
+export type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
