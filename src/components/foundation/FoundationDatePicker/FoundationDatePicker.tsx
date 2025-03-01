@@ -1,24 +1,29 @@
 import {DatePicker} from "@mui/x-date-pickers";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
 
 interface IProps {
     onChange: (date: Date) => void;
-    defaultValue?: Date;
+    value?: Date;
 }
 
-export const FoundationDatePicker = ({onChange, defaultValue}: IProps) => {
-    const [value, setValue] = useState<Dayjs>(dayjs(new Date()));
+export const FoundationDatePicker = ({onChange, value}: IProps) => {
+    const [localValue, setLocalValue] = useState<Dayjs>(dayjs(new Date()));
 
     const handleChange = (newValue: Dayjs) => {
-        setValue(newValue);
+        setLocalValue(dayjs(newValue));
         onChange(newValue.toDate());
     }
+
+    useEffect(() => {
+        setLocalValue(dayjs(value));
+    }, [value])
+
 
     return (
         <DatePicker
             label="Due date"
-            defaultValue={dayjs(defaultValue) || dayjs(value)}
+            value={dayjs(localValue)}
             onChange={(newValue) => newValue && handleChange(newValue)}
             sx={{
                 "& .MuiOutlinedInput-root": {
