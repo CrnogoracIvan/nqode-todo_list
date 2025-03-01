@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {IListItem} from "../../../types.ts";
 import {v4 as uuidv4} from 'uuid';
-import {Button} from "../../foundation/Button/Button.tsx";
-import {Input} from "../../foundation/Input/Input.tsx";
+import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
+import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
 import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 
 
@@ -38,13 +38,13 @@ export const NewItemForm = ({onSubmit}: IProps) => {
 
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>
-            <Input label={'Title'} value={title} onChangeValue={setTitle}/>
-            <Input label={'Description'} value={description} onChangeValue={setDescription}
-                   rows={7}/>
+            <FoundationInput label={'Title'} value={title} onChangeValue={setTitle}/>
+            <FoundationInput label={'Description'} value={description} onChangeValue={setDescription}
+                             rows={7}/>
             <div className="flex flex-1 flex-col justify-end">
                 <FoundationDatePicker onChange={setDueDate}/>
-                <Button customClass={'mt-4'} type={'SUBMIT'} onClick={handleSubmit} disabled={disableSubmit}
-                        label={'Save task'}/>
+                <FoundationButton customClass={'mt-4'} type={'SUBMIT'} onClick={handleSubmit} disabled={disableSubmit}
+                                  label={'Save task'}/>
             </div>
         </div>
     )

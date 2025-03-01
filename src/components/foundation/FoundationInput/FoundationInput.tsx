@@ -5,7 +5,7 @@ interface IProps {
     rows?: number;
 }
 
-export const Input = ({label, value, onChangeValue, rows = 1}: IProps) => {
+export const FoundationInput = ({label, value, onChangeValue, rows = 1}: IProps) => {
     const inputStyle = "w-full bg-transparent placeholder:text-slate-500 text-slate-700 text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:border-amber-300 focus:outline-none shadow-sm focus:shadow"
     const renderOneLineInputContent = () => (
         <input

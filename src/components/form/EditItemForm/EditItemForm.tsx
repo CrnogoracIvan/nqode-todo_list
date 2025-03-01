@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {IListItem} from "../../../types.ts";
-import {Button} from "../../foundation/Button/Button.tsx";
-import {Input} from "../../foundation/Input/Input.tsx";
+import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
+import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
 import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 
 
@@ -45,7 +45,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
         }
         return (
             <div className={'flex flex-row w-full justify-end'}>
-                <Button type={'SUCCESS'} onClick={() => onConfirm(item)} label={'Mark as completed'}/>
+                <FoundationButton type={'SUCCESS'} onClick={() => onConfirm(item)} label={'Mark as completed'}/>
             </div>
         )
     }
@@ -53,15 +53,16 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
     return (
         <div className={'flex flex-1 flex-col w-full'}>
             {renderCompletedButton()}
-            <Input label={'Title'} value={title} onChangeValue={setTitle}/>
-            <Input label={'Description'} value={description} onChangeValue={setDescription}
-                   rows={7}/>
+            <FoundationInput label={'Title'} value={title} onChangeValue={setTitle}/>
+            <FoundationInput label={'Description'} value={description} onChangeValue={setDescription}
+                             rows={7}/>
             <FoundationDatePicker defaultValue={item.dueDate} onChange={setDueDate}/>
 
             <div className="flex flex-1 flex-row justify-center">
-                <Button customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)} label={'Delete task'}/>
-                <Button customClass={'ml-2'} type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)}
-                        label={'Save changes'}/>
+                <FoundationButton customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)}
+                                  label={'Delete task'}/>
+                <FoundationButton customClass={'ml-2'} type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)}
+                                  label={'Save changes'}/>
             </div>
         </div>
     )
