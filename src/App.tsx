@@ -161,7 +161,7 @@ function App() {
 
 
     return (
-        <div className='flex flex-row justify-center items-center w-full h-dvh border-2'>
+        <div className='flex flex-row justify-center items-center w-full h-dvh'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
                 <div className={'w-1/5 p-6'}>
                     <Menu onItemClick={handleMenuItemClick}/>

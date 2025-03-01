@@ -57,8 +57,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
             <FoundationInput label={'Description'} value={description} onChangeValue={setDescription}
                              rows={7}/>
             <FoundationDatePicker value={item.dueDate} onChange={setDueDate}/>
-
-            <div className="flex flex-1 flex-row justify-center">
+            <div className="flex flex-1 flex-row justify-center mt-4">
                 <FoundationButton customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)}
                                   label={'Delete task'}/>
                 <FoundationButton customClass={'ml-2'} type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)}
