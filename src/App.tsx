@@ -5,7 +5,7 @@ import {IListItem, TMenuItem} from "./types.ts";
 import {ItemList} from "./components/ItemList/ItemList.tsx";
 import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
-import {capitalizeFirstLetter} from "./utils.ts";
+import {capitalizeFirstLetter, localStorageGetList, localStorageSetList} from "./utils.ts";
 import {LuSquareMousePointer} from "react-icons/lu";
 
 type TActiveForm = 'NONE' | 'NEW' | 'EDIT'
@@ -16,6 +16,11 @@ function App() {
     const [filteredBy, setFilteredBy] = useState<TMenuItem>('ALL');
     const [filteredList, setFilteredList] = useState<IListItem[]>([]);
     const [itemForEdit, setItemForEdit] = useState<IListItem | undefined>(undefined);
+
+    const handleListUpdate = (newList: IListItem[]) => {
+        setList(newList)
+        localStorageSetList(newList);
+    }
 
     const handleMenuItemClick = (menuItem: TMenuItem) => {
         setFilteredBy(menuItem);
@@ -37,7 +42,7 @@ function App() {
         const newList = [...list];
         newList.push(item);
 
-        setList(newList);
+        handleListUpdate(newList);
     }
 
     const handleSubmitEdit = (item: IListItem) => {
@@ -46,7 +51,7 @@ function App() {
         newList.splice(editItemIndex, 1, item);
 
         setItemForEdit(item);
-        setList(newList);
+        handleListUpdate(newList);
     }
 
     const handleItemDelete = (item: IListItem) => {
@@ -59,7 +64,7 @@ function App() {
             setActiveForm('NONE');
         }
         setItemForEdit(newList[nextItemIndexForDelete]);
-        setList(newList);
+        handleListUpdate(newList);
     }
 
     const handleItemCompleted = (item: IListItem) => {
@@ -70,8 +75,16 @@ function App() {
             status: 'COMPLETED'
         }
         newList.splice(completedItemIndex, 1, updatedItem);
-        setList(newList);
+        handleListUpdate(newList);
     }
+
+
+    useEffect(() => {
+        const list = localStorageGetList()
+        if (list.length) {
+            setList(list);
+        }
+    }, []);
 
     useEffect(() => {
         switch (filteredBy) {
