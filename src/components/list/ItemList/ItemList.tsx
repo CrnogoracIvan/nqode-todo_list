@@ -2,6 +2,7 @@ import {IListItem} from "../../../types.ts";
 import {Item} from "../Item/Item.tsx";
 import {useEffect, useState} from "react";
 import {GoSortAsc, GoSortDesc} from "react-icons/go";
+import {LuListTodo} from "react-icons/lu";
 
 type TSortBy = 'task' | 'date'
 type TSortOrder = 'asc' | 'desc'
@@ -89,6 +90,22 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
             ))}
         </ul>
     )
+
+    const renderEmptyList = () => {
+        return (
+            <div className={'flex flex-col items-center mt-40 h-full'}>
+                <LuListTodo className={'text-8xl mb-4'}/>
+                <p>The list is empty</p>
+            </div>
+        )
+    }
+
+    console.log('listItems', listItems);
+
+    if (listItems.length === 0) {
+        return renderEmptyList()
+    }
+
     return (
         <>
             {renderHeader()}

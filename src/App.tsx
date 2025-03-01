@@ -35,14 +35,14 @@ function App() {
         setItemForEdit(item);
     }
 
-    const handleSubmit = (item: IListItem) => {
+    const handleItemSubmit = (item: IListItem) => {
         const newList = [...list];
         newList.push(item);
 
         handleListUpdate(newList);
     }
 
-    const handleSubmitEdit = (item: IListItem) => {
+    const handleItemEdit = (item: IListItem) => {
         const newList = [...list];
         const editItemIndex = newList.findIndex((i) => i.id === item.id);
         newList.splice(editItemIndex, 1, item);
@@ -130,8 +130,8 @@ function App() {
                     <FormWrapper
                         itemForEdit={itemForEdit}
                         activeForm={activeForm}
-                        handleSubmit={handleSubmit}
-                        handleSubmitEdit={handleSubmitEdit}
+                        handleSubmit={handleItemSubmit}
+                        handleSubmitEdit={handleItemEdit}
                         handleItemDelete={handleItemDelete}
                         handleItemCompleted={handleItemCompleted}/>
                 </div>
