@@ -38,19 +38,16 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
         }
     }
 
-    useEffect(() => {
-        setListItems(items);
-    }, [items]);
 
     useEffect(() => {
         let sortedItemList
         if (sortBy === 'task') {
-            sortedItemList = listItems.sort((a, b) => sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
+            sortedItemList = items.sort((a, b) => sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
         } else {
-            sortedItemList = listItems.sort((a, b) => sortOrder === 'asc' ? new Date(b.dueDate).toISOString().localeCompare(new Date(a.dueDate).toISOString()) : new Date(a.dueDate).toISOString().localeCompare(new Date(b.dueDate).toISOString()));
+            sortedItemList = items.sort((a, b) => sortOrder === 'asc' ? new Date(b.dueDate).toISOString().localeCompare(new Date(a.dueDate).toISOString()) : new Date(a.dueDate).toISOString().localeCompare(new Date(b.dueDate).toISOString()));
         }
         setListItems(sortedItemList);
-    }, [listItems, sortBy, sortOrder]);
+    }, [items, sortBy, sortOrder]);
 
 
     const renderSortIcon = (item: IHeaderItem) => {
@@ -59,11 +56,11 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
         }
         if (sortOrder === 'asc') {
             return (
-                <GoSortAsc className={'font-bold'}/>
+                <GoSortAsc className={'text-xl font-bold'}/>
             )
         } else {
             return (
-                <GoSortDesc className={'font-bold'}/>
+                <GoSortDesc className={'text-xl font-bold'}/>
             )
         }
     }
