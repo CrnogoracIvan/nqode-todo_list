@@ -3,6 +3,7 @@ import {IListItem} from "../../../types.ts";
 import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
 import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
 import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 
 
 interface IProps {
@@ -41,7 +42,12 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
 
     const renderCompletedButton = () => {
         if (item.status === 'COMPLETED') {
-            return null
+            return (
+                <div className={'flex flex-row text-green-500 justify-end items-center font-bold h-12'}>
+                    <p className={'pr-2'}>The task has been completed</p>
+                    <IoMdCheckmarkCircleOutline className="text-xl"/>
+                </div>
+            )
         }
         return (
             <div className={'flex flex-row w-full justify-end'}>
@@ -54,8 +60,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
         <div className={'flex flex-1 flex-col w-full'}>
             {renderCompletedButton()}
             <FoundationInput label={'Title'} value={title} onChangeValue={setTitle}/>
-            <FoundationInput label={'Description'} value={description} onChangeValue={setDescription}
-                             rows={7}/>
+            <FoundationInput label={'Description'} value={description} onChangeValue={setDescription} rows={7}/>
             <FoundationDatePicker value={item.dueDate} onChange={setDueDate}/>
             <div className="flex flex-1 flex-row justify-center mt-4">
                 <FoundationButton customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)}

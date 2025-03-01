@@ -1,5 +1,6 @@
 import {BiChevronRight} from "react-icons/bi";
 import {IListItem} from "../../../types.ts";
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 
 interface IProps {
     item: IListItem;
@@ -26,7 +27,8 @@ export const Item = ({item, onClick, selectedItemId}: IProps) => {
                     {customizedDate}
                 </p>
             </div>
-            <div className={'w-1/6 flex justify-end'}>
+            <div className={'w-1/6 flex justify-end items-center'}>
+                {item.status === 'COMPLETED' && <IoMdCheckmarkCircleOutline className="text-green-500 text-xl"/>}
                 <BiChevronRight/>
             </div>
         </div>

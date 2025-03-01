@@ -74,6 +74,7 @@ function App() {
             ...item,
             status: 'COMPLETED'
         }
+        setItemForEdit(updatedItem);
         newList.splice(completedItemIndex, 1, updatedItem);
         handleListUpdate(newList);
     }
@@ -163,13 +164,13 @@ function App() {
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
-                <div className={'w-1/5 p-6'}>
+                <div className={'w-1/6 p-6'}>
                     <Menu onItemClick={handleMenuItemClick}/>
                 </div>
-                <div className={'w-2/5 p-6 bg-white'}>
+                <div className={'w-3/6 p-6 bg-white'}>
                     {renderList()}
                 </div>
-                <div className={'bg-slate-50 w-2/5 p-6'}>
+                <div className={'bg-slate-50 w-2/6 p-6'}>
                     {renderForm()}
                 </div>
             </div>
