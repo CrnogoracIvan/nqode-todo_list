@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {IListItem} from "../../types.ts";
-import {Button} from "../foundation/Button/Button.tsx";
-import {Input} from "../foundation/Input/Input.tsx";
+import {IListItem} from "../../../types.ts";
+import {Button} from "../../foundation/Button/Button.tsx";
+import {Input} from "../../foundation/Input/Input.tsx";
 
 
 interface IProps {

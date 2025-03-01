@@ -1,5 +1,5 @@
 import {BiChevronRight} from "react-icons/bi";
-import {IListItem} from "../../types.ts";
+import {IListItem} from "../../../types.ts";
 
 interface IProps {
     item: IListItem;
@@ -18,6 +18,9 @@ export const Item = ({item, onClick, selectedItemId}: IProps) => {
         >
             <p className={'ml-1'}>
                 {item.title}
+            </p>
+            <p className={'ml-1'}>
+                {item.dueDate}
             </p>
             <BiChevronRight/>
         </div>

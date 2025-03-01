@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {NewItemButton} from "./components/NewItemButton/NewItemButton.tsx";
-import {NewItemForm} from "./components/NewItemForm/NewItemForm.tsx";
+import {NewItemButton} from "./components/list/NewItemButton/NewItemButton.tsx";
+import {NewItemForm} from "./components/form/NewItemForm/NewItemForm.tsx";
 import {IListItem, TMenuItem} from "./types.ts";
-import {ItemList} from "./components/ItemList/ItemList.tsx";
-import {EditItemForm} from "./components/EditItemForm/EditItemForm.tsx";
+import {ItemList} from "./components/list/ItemList/ItemList.tsx";
+import {EditItemForm} from "./components/form/EditItemForm/EditItemForm.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
 import {capitalizeFirstLetter, localStorageGetList, localStorageSetList} from "./utils.ts";
 import {LuSquareMousePointer} from "react-icons/lu";

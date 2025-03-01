@@ -1,4 +1,4 @@
-import {IListItem} from "../../types.ts";
+import {IListItem} from "../../../types.ts";
 import {Item} from "../Item/Item.tsx";
 
 interface IProps {
