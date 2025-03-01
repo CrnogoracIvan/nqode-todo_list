@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react";
-import {NewItemButton} from "./components/list/NewItemButton/NewItemButton.tsx";
 import {IListItem, TActiveForm, TMenuItem} from "./types.ts";
-import {ItemList} from "./components/list/ItemList/ItemList.tsx";
 import {Menu} from "./components/Menu/Menu.tsx";
-import {capitalizeFirstLetter, localStorageGetList, localStorageSetList} from "./utils.ts";
+import {localStorageGetList, localStorageSetList} from "./utils.ts";
 import {FormWrapper} from "./components/form/FormWrapper/FormWrapper.tsx";
+import {ListWrapper} from "./components/list/ListWrapper/ListWrapper.tsx";
 
 
 function App() {
@@ -104,19 +103,6 @@ function App() {
         }
     }, [filteredBy, list]);
 
-    const renderList = () => {
-        const numberOfTasks = filteredList.length > 0 ? ` - ${filteredList.length}` : '';
-        const title = `${capitalizeFirstLetter(filteredBy)} tasks ${numberOfTasks}`;
-        const addNewItemDisabled = filteredBy === 'COMPLETED';
-        return (
-            <>
-                <h1 className='text-4xl font-bold mb-6'>{title}</h1>
-                <NewItemButton disabled={addNewItemDisabled} onClick={handleNewItemClick}/>
-                <ItemList onItemClick={handleItemClick} items={filteredList} selectedItem={itemForEdit}/>
-            </>
-        )
-    }
-
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
             <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
@@ -124,7 +110,13 @@ function App() {
                     <Menu onItemClick={handleMenuItemClick}/>
                 </div>
                 <div className={'w-3/6 p-6 bg-white'}>
-                    {renderList()}
+                    <ListWrapper
+                        filteredList={filteredList}
+                        filteredBy={filteredBy}
+                        handleNewItemClick={handleNewItemClick}
+                        handleItemClick={handleItemClick}
+                        itemForEdit={itemForEdit}
+                    />
                 </div>
                 <div className={'bg-slate-50 w-2/6 p-6'}>
                     <FormWrapper
