@@ -100,8 +100,6 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
         )
     }
 
-    console.log('listItems', listItems);
-
     if (listItems.length === 0) {
         return renderEmptyList()
     }
