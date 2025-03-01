@@ -30,7 +30,7 @@ export const NewItemForm = ({onSubmit}: IProps) => {
             id,
             title,
             description,
-            dueDate: dueDate?.toLocaleDateString('sr-RS'),
+            dueDate,
             status: 'ACTIVE'
         })
         resetForm()

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {IListItem} from "../../../types.ts";
 import {Button} from "../../foundation/Button/Button.tsx";
 import {Input} from "../../foundation/Input/Input.tsx";
+import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 
 
 interface IProps {
@@ -16,11 +17,14 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
     const [id, setId] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [dueDate, setDueDate] = useState<Date>(new Date());
+
 
     const dataForSubmit = {
         id,
         title,
         description,
+        dueDate,
         status: item.status,
     }
 
@@ -31,6 +35,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
         setId(item.id);
         setTitle(item.title);
         setDescription(item.description);
+        setDueDate(item.dueDate)
     }, [item]);
 
 
@@ -51,6 +56,8 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
             <Input label={'Title'} value={title} onChangeValue={setTitle}/>
             <Input label={'Description'} value={description} onChangeValue={setDescription}
                    rows={7}/>
+            <FoundationDatePicker defaultValue={item.dueDate} onChange={setDueDate}/>
+
             <div className="flex flex-1 flex-row justify-center">
                 <Button customClass={'mr-2'} type={'CANCEL'} onClick={() => onDelete(item)} label={'Delete task'}/>
                 <Button customClass={'ml-2'} type={'SUBMIT'} onClick={() => onSubmitChanges(dataForSubmit)}

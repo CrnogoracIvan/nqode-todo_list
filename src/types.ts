@@ -2,7 +2,7 @@ export interface IListItem {
     id: string;
     title: string;
     description: string;
-    dueDate?: string;
+    dueDate: Date;
     status: 'ACTIVE' | 'COMPLETED';
 }
 

@@ -19,9 +19,9 @@ export const Item = ({item, onClick, selectedItemId}: IProps) => {
             <p className={'ml-1'}>
                 {item.title}
             </p>
-            <p className={'ml-1'}>
-                {item.dueDate}
-            </p>
+            {/*<p className={'ml-1'}>*/}
+            {/*    {item.dueDate.toLocaleDateString()}*/}
+            {/*</p>*/}
             <BiChevronRight/>
         </div>
     )

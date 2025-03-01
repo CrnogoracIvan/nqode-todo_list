@@ -4,9 +4,10 @@ import dayjs, {Dayjs} from "dayjs";
 
 interface IProps {
     onChange: (date: Date) => void;
+    defaultValue?: Date;
 }
 
-export const FoundationDatePicker = ({onChange}: IProps) => {
+export const FoundationDatePicker = ({onChange, defaultValue}: IProps) => {
     const [value, setValue] = useState<Dayjs>(dayjs(new Date()));
 
     const handleChange = (newValue: Dayjs) => {
@@ -17,7 +18,7 @@ export const FoundationDatePicker = ({onChange}: IProps) => {
     return (
         <DatePicker
             label="Due date"
-            defaultValue={dayjs(value)}
+            defaultValue={dayjs(defaultValue) || dayjs(value)}
             onChange={(newValue) => newValue && handleChange(newValue)}
             sx={{
                 "& .MuiOutlinedInput-root": {
