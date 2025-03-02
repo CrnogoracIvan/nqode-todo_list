@@ -47,7 +47,7 @@ export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
 
     useEffect(() => {
         prepareNewDescription();
-    }, [dummyData, prepareNewDescription]);
+    }, [dummyData]);
 
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>

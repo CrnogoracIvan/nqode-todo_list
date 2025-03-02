@@ -58,9 +58,7 @@ function App() {
         newList.splice(deleteItemIndex, 1);
 
         const nextItemIndexForDelete = deleteItemIndex === newList.length ? newList.length - 1 : deleteItemIndex;
-        if (!newList.length) {
-            setActiveForm('NONE');
-        }
+
         setItemForEdit(newList[nextItemIndexForDelete]);
         handleListUpdate(newList);
     }
@@ -118,6 +116,12 @@ function App() {
             }
         }
     }, [filteredBy, list]);
+
+    useEffect(() => {
+        if (!list.length || !filteredList.length) {
+            setActiveForm('NONE');
+        }
+    }, [filteredList.length, list.length]);
 
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
