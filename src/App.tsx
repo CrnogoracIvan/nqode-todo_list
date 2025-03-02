@@ -11,7 +11,7 @@ function App() {
     const [list, setList] = useState<IListItem[]>([]);
     const [filteredBy, setFilteredBy] = useState<TMenuItem>('ALL');
     const [filteredList, setFilteredList] = useState<IListItem[]>([]);
-    const [itemForEdit, setItemForEdit] = useState<IListItem | undefined>(undefined);
+    const [taskForEdit, setTaskForEdit] = useState<IListItem | undefined>(undefined);
     const [coffee, setCoffee] = useState([]);
 
 
@@ -23,43 +23,43 @@ function App() {
     const handleMenuItemClick = (menuItem: TMenuItem) => {
         setFilteredBy(menuItem);
         setActiveForm('NONE');
-        setItemForEdit(undefined);
+        setTaskForEdit(undefined);
     }
 
-    const handleNewItemClick = () => {
+    const handleNewTaskClick = () => {
         setActiveForm('NEW')
-        setItemForEdit(undefined)
+        setTaskForEdit(undefined)
     }
 
-    const handleItemClick = (item: IListItem) => {
+    const handleTaskClick = (item: IListItem) => {
         setActiveForm('EDIT')
-        setItemForEdit(item);
+        setTaskForEdit(item);
     }
 
-    const handleItemSubmit = (item: IListItem) => {
+    const handleNewTaskSubmit = (item: IListItem) => {
         const newList = [...list];
         newList.push(item);
 
         handleListUpdate(newList);
     }
 
-    const handleItemEdit = (item: IListItem) => {
+    const handleTaskEdit = (item: IListItem) => {
         const newList = [...list];
-        const editItemIndex = newList.findIndex((i) => i.id === item.id);
-        newList.splice(editItemIndex, 1, item);
+        const editTaskIndex = newList.findIndex((i) => i.id === item.id);
+        newList.splice(editTaskIndex, 1, item);
 
-        setItemForEdit(item);
+        setTaskForEdit(item);
         handleListUpdate(newList);
     }
 
-    const handleItemDelete = (item: IListItem) => {
+    const handleTaskDelete = (item: IListItem) => {
         const newList = [...list];
-        const deleteItemIndex = newList.findIndex((i) => i.id === item.id);
-        newList.splice(deleteItemIndex, 1);
+        const deleteTaskIndex = newList.findIndex((i) => i.id === item.id);
+        newList.splice(deleteTaskIndex, 1);
 
-        const nextItemIndexForDelete = deleteItemIndex === newList.length ? newList.length - 1 : deleteItemIndex;
+        const nextTaskIndexForDelete = deleteTaskIndex === newList.length ? newList.length - 1 : deleteTaskIndex;
 
-        setItemForEdit(newList[nextItemIndexForDelete]);
+        setTaskForEdit(newList[nextTaskIndexForDelete]);
         handleListUpdate(newList);
     }
 
@@ -70,7 +70,7 @@ function App() {
             ...item,
             status: 'COMPLETED'
         }
-        setItemForEdit(updatedItem);
+        setTaskForEdit(updatedItem);
         newList.splice(completedItemIndex, 1, updatedItem);
         handleListUpdate(newList);
     }
@@ -133,18 +133,18 @@ function App() {
                     <ListWrapper
                         filteredList={filteredList}
                         filteredBy={filteredBy}
-                        handleNewItemClick={handleNewItemClick}
-                        handleItemClick={handleItemClick}
-                        itemForEdit={itemForEdit}
+                        handleNewItemClick={handleNewTaskClick}
+                        handleItemClick={handleTaskClick}
+                        itemForEdit={taskForEdit}
                     />
                 </div>
                 <div className={'bg-slate-50 w-2/6 p-6'}>
                     <FormWrapper
-                        itemForEdit={itemForEdit}
+                        itemForEdit={taskForEdit}
                         activeForm={activeForm}
-                        handleSubmit={handleItemSubmit}
-                        handleSubmitEdit={handleItemEdit}
-                        handleItemDelete={handleItemDelete}
+                        handleSubmit={handleNewTaskSubmit}
+                        handleSubmitEdit={handleTaskEdit}
+                        handleItemDelete={handleTaskDelete}
                         handleItemCompleted={handleItemCompleted}
                         dummyData={coffee}
                     />
