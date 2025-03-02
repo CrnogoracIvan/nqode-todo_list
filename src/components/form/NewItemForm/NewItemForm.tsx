@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {IDummyDataItem, IListItem} from "../../../types.ts";
 import {v4 as uuidv4} from 'uuid';
 import {FoundationButton} from "../../_foundation/FoundationButton/FoundationButton.tsx";
@@ -18,12 +18,12 @@ export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
 
     const disableSubmit = title.length === 0 || description.length === 0;
 
-    const prepareNewDescription = () => {
+    const prepareNewDescription = useCallback(() => {
         const oneCoffeeForDescriptionIndex = dummyData?.length && getRandomNumber(dummyData.length);
         const oneCoffee = dummyData[oneCoffeeForDescriptionIndex]
         const coffeeDescription = `${oneCoffee?.title} - ${oneCoffee?.description}`;
         setDescription(coffeeDescription);
-    }
+    }, [dummyData])
 
     const resetForm = () => {
         setTitle('');
@@ -45,7 +45,7 @@ export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
 
     useEffect(() => {
         prepareNewDescription();
-    }, [dummyData]);
+    }, [dummyData, prepareNewDescription]);
 
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>
