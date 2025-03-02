@@ -118,10 +118,10 @@ function App() {
     }, [filteredBy, list]);
 
     useEffect(() => {
-        if (!list.length || !filteredList.length) {
+        if (!filteredList.length) {
             setActiveForm('NONE');
         }
-    }, [filteredList.length, list.length]);
+    }, [filteredList.length]);
 
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
