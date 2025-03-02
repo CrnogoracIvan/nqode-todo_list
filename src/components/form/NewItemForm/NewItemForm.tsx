@@ -1,27 +1,35 @@
-import {useState} from "react";
-import {IListItem} from "../../../types.ts";
+import {useEffect, useState} from "react";
+import {IDummyDataItem, IListItem} from "../../../types.ts";
 import {v4 as uuidv4} from 'uuid';
 import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
 import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
 import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
-
+import {getRandomNumber} from "../../../utils.ts";
 
 interface IProps {
     onSubmit: (item: IListItem) => void;
+    dummyData: IDummyDataItem[];
 }
 
-
-export const NewItemForm = ({onSubmit}: IProps) => {
+export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [dueDate, setDueDate] = useState<Date>(new Date());
 
+
     const disableSubmit = title.length === 0 || description.length === 0;
+
+    const prepareNewDescription = () => {
+        const oneCoffeeForDescriptionIndex = dummyData?.length && getRandomNumber(dummyData.length);
+        const oneCoffee = dummyData[oneCoffeeForDescriptionIndex]
+        const coffeeDescription = `${oneCoffee?.title} - ${oneCoffee?.description}`;
+        setDescription(coffeeDescription);
+    }
 
     const resetForm = () => {
         setTitle('');
-        setDescription('');
+        prepareNewDescription();
     }
 
     const handleSubmit = () => {
@@ -35,6 +43,11 @@ export const NewItemForm = ({onSubmit}: IProps) => {
         })
         resetForm()
     }
+
+
+    useEffect(() => {
+        prepareNewDescription();
+    }, [dummyData, prepareNewDescription]);
 
     return (
         <div className={'flex flex-1 flex-col border-1 w-full p-4'}>

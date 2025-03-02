@@ -4,7 +4,7 @@ import {Menu} from "./components/Menu/Menu.tsx";
 import {localStorageGetList, localStorageSetList} from "./utils.ts";
 import {FormWrapper} from "./components/form/FormWrapper/FormWrapper.tsx";
 import {ListWrapper} from "./components/list/ListWrapper/ListWrapper.tsx";
-
+import {getCoffeeService} from "./services/coffee.service.ts";
 
 function App() {
     const [activeForm, setActiveForm] = useState<TActiveForm>('NONE');
@@ -12,6 +12,8 @@ function App() {
     const [filteredBy, setFilteredBy] = useState<TMenuItem>('ALL');
     const [filteredList, setFilteredList] = useState<IListItem[]>([]);
     const [itemForEdit, setItemForEdit] = useState<IListItem | undefined>(undefined);
+    const [coffee, setCoffee] = useState([]);
+
 
     const handleListUpdate = (newList: IListItem[]) => {
         setList(newList)
@@ -75,6 +77,20 @@ function App() {
         handleListUpdate(newList);
     }
 
+    useEffect(() => {
+        const getCoffee = async () => {
+            try {
+                const data = await getCoffeeService();
+                if (data) {
+                    setCoffee(data);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        getCoffee();
+    }, []);
+
 
     useEffect(() => {
         const list = localStorageGetList()
@@ -125,7 +141,9 @@ function App() {
                         handleSubmit={handleItemSubmit}
                         handleSubmitEdit={handleItemEdit}
                         handleItemDelete={handleItemDelete}
-                        handleItemCompleted={handleItemCompleted}/>
+                        handleItemCompleted={handleItemCompleted}
+                        dummyData={coffee}
+                    />
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import {NewItemForm} from "../NewItemForm/NewItemForm.tsx";
 import {EditItemForm} from "../EditItemForm/EditItemForm.tsx";
 import {LuSquareMousePointer} from "react-icons/lu";
-import {IListItem, TActiveForm} from "../../../types.ts";
+import {IDummyDataItem, IListItem, TActiveForm} from "../../../types.ts";
 
 interface IProps {
     itemForEdit: IListItem | undefined;
@@ -10,6 +10,7 @@ interface IProps {
     handleSubmitEdit: (item: IListItem) => void
     handleItemDelete: (item: IListItem) => void
     handleItemCompleted: (item: IListItem) => void
+    dummyData: IDummyDataItem[]
 }
 
 export const FormWrapper = ({
@@ -18,14 +19,15 @@ export const FormWrapper = ({
                                 handleSubmit,
                                 handleSubmitEdit,
                                 handleItemCompleted,
-                                handleItemDelete
+                                handleItemDelete,
+                                dummyData,
                             }: IProps) => {
     const formTitle = itemForEdit ? `Task: ${itemForEdit.title}` : 'New Task:';
     const getForm = () => {
         switch (activeForm) {
             case "NEW":
                 return (
-                    <NewItemForm onSubmit={handleSubmit}/>
+                    <NewItemForm onSubmit={handleSubmit} dummyData={dummyData}/>
                 )
             case "EDIT":
                 if (!itemForEdit) {
