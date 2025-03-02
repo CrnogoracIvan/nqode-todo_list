@@ -4,7 +4,7 @@ export const capitalizeFirstLetter = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
 export const getRandomNumber = (to: number) => {
-    return Math.floor(Math.random() * (to + 1));
+    return Math.floor(Math.random() * (to));
 }
 
 export const localStorageSetList = (list: IListItem[]) => {
