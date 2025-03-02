@@ -5,14 +5,12 @@ import {FoundationInput} from "../../_foundation/FoundationInput/FoundationInput
 import {FoundationDatePicker} from "../../_foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 
-
 interface IProps {
     item: IListItem;
     onSubmitChanges: (item: IListItem) => void;
     onDelete: (item: IListItem) => void;
     onConfirm: (item: IListItem) => void;
 }
-
 
 export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProps) => {
     const [id, setId] = useState<string>('');

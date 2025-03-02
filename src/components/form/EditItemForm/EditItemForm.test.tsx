@@ -4,6 +4,7 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import {EditItemForm} from "./EditItemForm";
 import "@testing-library/jest-dom";
+import {IListItem} from "../../../types.ts";
 
 // Mock Foundation components
 jest.mock("../../_foundation/FoundationButton/FoundationButton.tsx", () => ({
@@ -40,7 +41,7 @@ describe("EditItemForm", () => {
     const mockDelete = jest.fn();
     const mockConfirm = jest.fn();
 
-    const item = {
+    const item: IListItem = {
         id: "1",
         title: "Existing Task",
         description: "Test description",

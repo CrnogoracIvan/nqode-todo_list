@@ -5,6 +5,8 @@
 import {render, screen} from "@testing-library/react";
 import {FormWrapper} from "./FormWrapper";
 import "@testing-library/jest-dom";
+import {IListItem} from "../../../types.ts";
+import {mockDummyData} from "../../../mocks/dummyData.ts";
 
 // Mock child components
 jest.mock("../NewItemForm/NewItemForm.tsx", () => ({
@@ -31,7 +33,7 @@ describe("FormWrapper", () => {
     const mockHandleItemDelete = jest.fn();
     const mockHandleItemCompleted = jest.fn();
 
-    const itemForEdit = {
+    const itemForEdit: IListItem = {
         id: "1",
         title: "Existing Task",
         description: "Test description",
@@ -48,6 +50,7 @@ describe("FormWrapper", () => {
                 handleSubmitEdit={mockHandleSubmitEdit}
                 handleItemDelete={mockHandleItemDelete}
                 handleItemCompleted={mockHandleItemCompleted}
+                dummyData={mockDummyData}
             />
         );
 
@@ -64,6 +67,7 @@ describe("FormWrapper", () => {
                 handleSubmitEdit={mockHandleSubmitEdit}
                 handleItemDelete={mockHandleItemDelete}
                 handleItemCompleted={mockHandleItemCompleted}
+                dummyData={mockDummyData}
             />
         );
 
@@ -80,6 +84,7 @@ describe("FormWrapper", () => {
                 handleSubmitEdit={mockHandleSubmitEdit}
                 handleItemDelete={mockHandleItemDelete}
                 handleItemCompleted={mockHandleItemCompleted}
+                dummyData={mockDummyData}
             />
         );
 
@@ -95,6 +100,7 @@ describe("FormWrapper", () => {
                 handleSubmitEdit={mockHandleSubmitEdit}
                 handleItemDelete={mockHandleItemDelete}
                 handleItemCompleted={mockHandleItemCompleted}
+                dummyData={mockDummyData}
             />
         );
 
@@ -111,6 +117,7 @@ describe("FormWrapper", () => {
                 handleSubmitEdit={mockHandleSubmitEdit}
                 handleItemDelete={mockHandleItemDelete}
                 handleItemCompleted={mockHandleItemCompleted}
+                dummyData={mockDummyData}
             />
         );
 

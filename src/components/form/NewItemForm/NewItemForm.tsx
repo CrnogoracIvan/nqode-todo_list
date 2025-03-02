@@ -12,11 +12,9 @@ interface IProps {
 }
 
 export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
-
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [dueDate, setDueDate] = useState<Date>(new Date());
-
 
     const disableSubmit = title.length === 0 || description.length === 0;
 

@@ -24,8 +24,7 @@ export const FoundationInput = ({label, value, onChangeValue, rows = 1}: IProps)
             onChange={(e) => onChangeValue(e.target.value)}
         />
     )
-
-
+    
     return (
         <div className="w-full  min-w-[200px] py-2">
             {rows > 1 ? renderMultipleLineInputContent() : renderOneLineInputContent()}

@@ -5,6 +5,7 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import {NewItemForm} from "./NewItemForm";
 import "@testing-library/jest-dom";
+import {mockDummyData} from "../../../mocks/dummyData.ts";
 
 // Mock child components
 jest.mock("../../_foundation/FoundationInput/FoundationInput.tsx", () => ({
@@ -37,7 +38,7 @@ jest.mock("../../_foundation/FoundationButton/FoundationButton.tsx", () => ({
 
 describe("NewItemForm", () => {
     test("renders inputs and button", () => {
-        render(<NewItemForm onSubmit={jest.fn()}/>);
+        render(<NewItemForm dummyData={mockDummyData} onSubmit={jest.fn()}/>);
 
         expect(screen.getByLabelText(/title/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/description/i)).toBeInTheDocument();
@@ -46,7 +47,7 @@ describe("NewItemForm", () => {
     });
 
     test("enables submit button when all fields are filled", () => {
-        render(<NewItemForm onSubmit={jest.fn()}/>);
+        render(<NewItemForm dummyData={mockDummyData} onSubmit={jest.fn()}/>);
 
         fireEvent.change(screen.getByLabelText(/title/i), {target: {value: "New Task"}});
         fireEvent.change(screen.getByLabelText(/description/i), {target: {value: "Task description"}});
@@ -56,7 +57,7 @@ describe("NewItemForm", () => {
 
     test("calls onSubmit with correct data when form is submitted", () => {
         const mockOnSubmit = jest.fn();
-        render(<NewItemForm onSubmit={mockOnSubmit}/>);
+        render(<NewItemForm dummyData={mockDummyData} onSubmit={mockOnSubmit}/>);
 
         fireEvent.change(screen.getByLabelText(/title/i), {target: {value: "New Task"}});
         fireEvent.change(screen.getByLabelText(/description/i), {target: {value: "Task description"}});
@@ -75,7 +76,7 @@ describe("NewItemForm", () => {
     });
 
     test("resets form after submission", () => {
-        render(<NewItemForm onSubmit={jest.fn()}/>);
+        render(<NewItemForm dummyData={mockDummyData} onSubmit={jest.fn()}/>);
 
         const titleInput = screen.getByLabelText(/title/i);
         const descriptionInput = screen.getByLabelText(/description/i);

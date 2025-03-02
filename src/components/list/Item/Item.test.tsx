@@ -14,7 +14,7 @@ describe("Item Component", () => {
         id: "1",
         title: "Test Task",
         description: "This is a test task",
-        dueDate: new Date().toISOString(),
+        dueDate: new Date(),
         status: "ACTIVE",
     };
 

@@ -40,7 +40,6 @@ export const FoundationDatePicker = ({onChange, value}: IProps) => {
                         color: "rgb(252, 211, 77) !important", // Amber 300 when focused
                     },
                 },
-                // 🎨 Stronger Selector for Selected Date Color
                 "& .MuiDayPicker-day.Mui-selected": {
                     backgroundColor: "rgb(252, 211, 77) !important", // Amber 300 background
                     color: "rgb(30, 41, 59) !important", // Dark text (slate-800)
