@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {IListItem} from "../../../types.ts";
-import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
-import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
-import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
+import {FoundationButton} from "../../_foundation/FoundationButton/FoundationButton.tsx";
+import {FoundationInput} from "../../_foundation/FoundationInput/FoundationInput.tsx";
+import {FoundationDatePicker} from "../../_foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 import {IoMdCheckmarkCircleOutline} from "react-icons/io";
 
 

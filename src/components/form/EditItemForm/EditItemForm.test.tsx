@@ -6,7 +6,7 @@ import {EditItemForm} from "./EditItemForm";
 import "@testing-library/jest-dom";
 
 // Mock Foundation components
-jest.mock("../../foundation/FoundationButton/FoundationButton.tsx", () => ({
+jest.mock("../../_foundation/FoundationButton/FoundationButton.tsx", () => ({
     FoundationButton: ({onClick, label}: any) => (
         <button data-testid={label} onClick={onClick}>
             {label}
@@ -14,7 +14,7 @@ jest.mock("../../foundation/FoundationButton/FoundationButton.tsx", () => ({
     ),
 }));
 
-jest.mock("../../foundation/FoundationInput/FoundationInput.tsx", () => ({
+jest.mock("../../_foundation/FoundationInput/FoundationInput.tsx", () => ({
     FoundationInput: ({label, value, onChangeValue}: any) => (
         <input
             data-testid={label}
@@ -24,7 +24,7 @@ jest.mock("../../foundation/FoundationInput/FoundationInput.tsx", () => ({
     ),
 }));
 
-jest.mock("../../foundation/FoundationDatePicker/FoundationDatePicker.tsx", () => ({
+jest.mock("../../_foundation/FoundationDatePicker/FoundationDatePicker.tsx", () => ({
     FoundationDatePicker: ({onChange, value}: any) => (
         <input
             data-testid="date-picker"

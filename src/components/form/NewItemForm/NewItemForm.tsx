@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {IDummyDataItem, IListItem} from "../../../types.ts";
 import {v4 as uuidv4} from 'uuid';
-import {FoundationButton} from "../../foundation/FoundationButton/FoundationButton.tsx";
-import {FoundationInput} from "../../foundation/FoundationInput/FoundationInput.tsx";
-import {FoundationDatePicker} from "../../foundation/FoundationDatePicker/FoundationDatePicker.tsx";
+import {FoundationButton} from "../../_foundation/FoundationButton/FoundationButton.tsx";
+import {FoundationInput} from "../../_foundation/FoundationInput/FoundationInput.tsx";
+import {FoundationDatePicker} from "../../_foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 import {getRandomNumber} from "../../../utils.ts";
 
 interface IProps {
