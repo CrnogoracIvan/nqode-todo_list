@@ -3,16 +3,14 @@ import {FoundationInput} from "../_foundation/FoundationInput/FoundationInput.ts
 import {FoundationButton} from "../_foundation/FoundationButton/FoundationButton.tsx";
 import {mockUsers} from "../../mocks/dummyData.ts";
 import {localStorageSetUser} from "../../utils.ts";
-import {IDummyUserData} from "../../types.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
-interface IProps {
-    onSuccessLogin: (user: IDummyUserData) => void;
-}
 
-export const Auth = ({onSuccessLogin}: IProps) => {
+export const Auth = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [isError, setIsError] = useState<boolean>(false);
+    const {login} = useAuth();
 
     const buttonDisabled = username.length === 0 || password.length === 0 || isError;
 
@@ -30,7 +28,7 @@ export const Auth = ({onSuccessLogin}: IProps) => {
         const findUser = mockUsers.find((user) => user.name === username && user.password === password);
         if (findUser) {
             findUser.password = '****'
-            onSuccessLogin(findUser);
+            login(findUser);
             localStorageSetUser(findUser);
         } else {
             setIsError(true)

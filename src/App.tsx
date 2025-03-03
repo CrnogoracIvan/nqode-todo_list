@@ -25,7 +25,7 @@ function App() {
     return (
         <div className="flex flex-row justify-center items-center w-full h-dvh">
             <AuthContext.Provider value={{loggedUser, login, logout}}>
-                {loggedUser ? <Home/> : <Auth onSuccessLogin={login}/>}
+                {loggedUser ? <Home/> : <Auth/>}
             </AuthContext.Provider>
         </div>
     );
