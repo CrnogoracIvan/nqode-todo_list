@@ -11,6 +11,7 @@ describe("Item Component", () => {
     const mockOnClick = jest.fn();
 
     const testItem: IListItem = {
+        userId: 'user1',
         id: "1",
         title: "Test Task",
         description: "This is a test task",

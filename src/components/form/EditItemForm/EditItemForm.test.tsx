@@ -42,6 +42,7 @@ describe("EditItemForm", () => {
     const mockConfirm = jest.fn();
 
     const item: IListItem = {
+        userId: 'user1',
         id: "1",
         title: "Existing Task",
         description: "Test description",

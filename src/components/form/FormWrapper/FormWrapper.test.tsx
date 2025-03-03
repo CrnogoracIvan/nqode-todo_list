@@ -34,6 +34,7 @@ describe("FormWrapper", () => {
     const mockHandleItemCompleted = jest.fn();
 
     const itemForEdit: IListItem = {
+        userId: 'user1',
         id: "1",
         title: "Existing Task",
         description: "Test description",
