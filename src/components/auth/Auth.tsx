@@ -49,14 +49,32 @@ export const Auth = () => {
         </div>
     )
 
-    return (
-        <div className="flex flex-col justify-center items-center bg-slate-50 rounded-2xl w-[40rem] h-[36rem]">
-            <h1 className={'text-3xl font-bold text-center mb-12'}>
-                Welcome to <br/>To-Do list
-            </h1>
-            {renderInputs()}
-            <FoundationButton type={'SUBMIT'} label={'Login'} onClick={handleLogin}
-                              disabled={buttonDisabled}/>
+    const renderHelper = () => (
+        <div
+            className={`absolute bottom-0 left-0 bg-amber-100 rounded-md w-96 h-46 p-4 m-4 shadow-lg ${isError && 'border-red-600 border-2 animate-bounce'}`}>
+            <p className={'text-xs font-bold text-slate-600 mb-2'}>Test credentials:</p>
+            {mockUsers.map((item) => (
+                <p key={item.id} className={'text-xs font-bold text-slate-600'}>
+                    {`username: ${item.name}, password: ${item.password}`}
+                </p>
+            ))}
+
         </div>
+    )
+
+    return (
+        <>
+            <div
+                className="flex flex-col justify-center items-center bg-slate-50 rounded-2xl w-[40rem] h-[36rem] shadow-md">
+                <h1 className={'text-3xl font-bold text-center mb-12'}>
+                    Welcome to <br/>To-Do list
+                </h1>
+                {renderInputs()}
+                <FoundationButton type={'SUBMIT'} label={'Login'} onClick={handleLogin}
+                                  disabled={buttonDisabled}/>
+            </div>
+
+            {renderHelper()}
+        </>
     )
 }
