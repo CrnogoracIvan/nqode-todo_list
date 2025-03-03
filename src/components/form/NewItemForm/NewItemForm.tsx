@@ -5,6 +5,7 @@ import {FoundationButton} from "../../_foundation/FoundationButton/FoundationBut
 import {FoundationInput} from "../../_foundation/FoundationInput/FoundationInput.tsx";
 import {FoundationDatePicker} from "../../_foundation/FoundationDatePicker/FoundationDatePicker.tsx";
 import {getRandomNumber} from "../../../utils.ts";
+import {useAuth} from "../../../hooks/useAuth.ts";
 
 interface IProps {
     onSubmit: (item: IListItem) => void;
@@ -15,6 +16,7 @@ export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [dueDate, setDueDate] = useState<Date>(new Date());
+    const {loggedUser} = useAuth()
 
     const disableSubmit = title.length === 0 || description.length === 0;
 
@@ -33,6 +35,7 @@ export const NewItemForm = ({onSubmit, dummyData}: IProps) => {
     const handleSubmit = () => {
         const id = uuidv4();
         onSubmit({
+            userId: loggedUser?.id || '',
             id,
             title,
             description,

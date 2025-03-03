@@ -40,9 +40,7 @@ export const Home = () => {
 
     const handleNewTaskSubmit = (item: IListItem) => {
         const newList = [...list];
-        const modifiedTask = item;
-        modifiedTask.userId = loggedUser?.id || '';
-        newList.push(modifiedTask);
+        newList.push(item);
 
         handleListUpdate(newList);
     }

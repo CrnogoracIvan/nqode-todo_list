@@ -20,6 +20,7 @@ export const EditItemForm = ({item, onSubmitChanges, onDelete, onConfirm}: IProp
 
 
     const dataForSubmit = {
+        userId: item.userId,
         id,
         title,
         description,
