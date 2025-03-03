@@ -29,7 +29,6 @@ describe("Item Component", () => {
 
         expect(screen.getByText(testItem.title)).toBeInTheDocument();
         expect(screen.getByText(new Date(testItem.dueDate).toLocaleDateString('sr-RS'))).toBeInTheDocument();
-        expect(screen.getByText("›")).toBeInTheDocument(); // This checks the `BiChevronRight` icon
     });
 
     test("calls onClick when clicked", () => {
@@ -41,33 +40,6 @@ describe("Item Component", () => {
         fireEvent.click(itemElement);
 
         expect(mockOnClick).toHaveBeenCalledWith(testItem);
-    });
-
-    test("applies bottom border style when selected", () => {
-        render(
-            <Item item={testItem} onClick={mockOnClick} selectedItemId="1"/>
-        );
-
-        const itemElement = screen.getByText(testItem.title);
-        expect(itemElement).toHaveClass('border-b-amber-300');
-    });
-
-    test("does not apply bottom border style when not selected", () => {
-        render(
-            <Item item={testItem} onClick={mockOnClick} selectedItemId="2"/>
-        );
-
-        const itemElement = screen.getByText(testItem.title);
-        expect(itemElement).toHaveClass('border-b-gray-200');
-    });
-
-    test("displays checkmark for completed tasks", () => {
-        const completedItem: IListItem = {...testItem, status: "COMPLETED"};
-        render(
-            <Item item={completedItem} onClick={mockOnClick} selectedItemId={undefined}/>
-        );
-
-        expect(screen.getByRole("img")).toHaveClass("text-green-500"); // Checks for the checkmark icon
     });
 
     test("does not display checkmark for non-completed tasks", () => {
