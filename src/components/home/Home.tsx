@@ -127,7 +127,7 @@ export const Home = () => {
     }, [filteredList.length]);
 
     return (
-        <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
+        <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] shadow-md'>
             <div className={'w-1/6 p-6'}>
                 <Menu onItemClick={handleMenuItemClick}/>
             </div>
