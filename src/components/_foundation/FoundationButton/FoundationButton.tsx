@@ -28,7 +28,7 @@ export const FoundationButton = ({label, type, disabled = false, onClick, custom
     return (
         <button
             className={`${globalStyle} ${disabledStyle} ${getStyleByType()} ${customClass}`}
-            type="button"
+            type="submit"
             disabled={disabled}
             onClick={onClick}
         >

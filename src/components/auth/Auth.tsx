@@ -39,19 +39,20 @@ export const Auth = () => {
         <p className={'text-red-600 mb-2 text-center'}>Username or password are incorrect.</p>
     )
 
-    const renderInputs = () => (
-        <div className='w-72 h-48'>
+    const renderForm = () => (
+        <form className='flex-col flex w-72 h-48 items-center' onSubmit={handleLogin}>
             <FoundationInput label={'username'} value={username} onChangeValue={handleUsernameChange} error={isError}/>
             <FoundationInput label={'password'} value={password} type={'password'} onChangeValue={handlePasswordChange}
                              error={isError}/>
             {isError && renderError()}
-
-        </div>
+            <FoundationButton customClass={'mt-8'} type={'SUBMIT'} label={'Login'} onClick={handleLogin}
+                              disabled={buttonDisabled}/>
+        </form>
     )
 
     const renderHelper = () => (
         <div
-            className={`absolute bottom-0 left-0 bg-amber-100 rounded-md w-96 h-46 p-4 m-4 shadow-lg ${isError && 'border-red-600 border-2 animate-bounce'}`}>
+            className={`absolute bottom-0 left-0 bg-amber-100 rounded-md w-86 h-46 p-4 m-4 shadow-lg ${isError && 'border-red-600 border-2 animate-bounce'}`}>
             <p className={'text-xs font-bold text-slate-600 mb-2'}>Test credentials:</p>
             {mockUsers.map((item) => (
                 <p key={item.id} className={'text-xs font-bold text-slate-600'}>
@@ -69,11 +70,8 @@ export const Auth = () => {
                 <h1 className={'text-3xl font-bold text-center mb-12'}>
                     Welcome to <br/>To-Do list
                 </h1>
-                {renderInputs()}
-                <FoundationButton type={'SUBMIT'} label={'Login'} onClick={handleLogin}
-                                  disabled={buttonDisabled}/>
+                {renderForm()}
             </div>
-
             {renderHelper()}
         </>
     )
