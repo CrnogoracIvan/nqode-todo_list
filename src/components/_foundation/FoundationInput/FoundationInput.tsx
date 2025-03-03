@@ -8,12 +8,12 @@ interface IProps {
 }
 
 export const FoundationInput = ({label, value, onChangeValue, rows = 1, type = 'text', error = false}: IProps) => {
-    const inputStyle = "w-full bg-transparent placeholder:text-slate-500 text-slate-700 text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:border-amber-300 focus:outline-none shadow-sm focus:shadow"
-    const errorInputStyle = 'border-red-600'
+    const inputStyle = "w-full bg-transparent placeholder:text-slate-500 text-slate-700 text-sm border rounded-md px-3 py-2 transition duration-300 ease focus:border-amber-300 focus:outline-none shadow-sm focus:shadow"
+    const borderStyle = `${error ? 'border-red-600' : 'border-slate-400'}`
     const renderOneLineInputContent = () => (
         <input
             type={type}
-            className={`${inputStyle} ${error ? errorInputStyle : ''}`}
+            className={`${inputStyle} ${borderStyle}`}
             placeholder={`Add ${label} ...`}
             value={value}
             onChange={(e) => onChangeValue(e.target.value)}

@@ -27,9 +27,9 @@ export const Auth = () => {
     const handleLogin = () => {
         const findUser = mockUsers.find((user) => user.name === username && user.password === password);
         if (findUser) {
-            findUser.password = '****'
-            login(findUser);
-            localStorageSetUser(findUser);
+            const newUser = {...findUser, password: '****'}
+            login(newUser);
+            localStorageSetUser(newUser);
         } else {
             setIsError(true)
         }
