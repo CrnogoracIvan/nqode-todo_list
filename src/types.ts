@@ -1,4 +1,5 @@
 export interface IListItem {
+    userId: string;
     id: string;
     title: string;
     description: string;
@@ -18,6 +19,12 @@ export interface IDummyUserData {
     id: string;
     name: string;
     password?: string;
+}
+
+export interface IAuthContext {
+    loggedUser: IDummyUserData | null;
+    login: (user: IDummyUserData) => void;
+    logout: () => void;
 }
 
 export type TMenuItem = 'ALL' | 'ACTIVE' | 'COMPLETED';

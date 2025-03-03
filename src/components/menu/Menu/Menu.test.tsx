@@ -3,10 +3,10 @@
  */
 
 import {fireEvent, render, screen} from "@testing-library/react";
-import {Menu} from "./Menu";
+import {Menu} from "./Menu.tsx";
 import "@testing-library/jest-dom";
 
-describe("Menu Component", () => {
+describe("menu Component", () => {
     const mockOnItemClick = jest.fn();
 
     beforeEach(() => {
