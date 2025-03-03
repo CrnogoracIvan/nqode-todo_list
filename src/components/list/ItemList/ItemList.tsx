@@ -26,8 +26,8 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
     const [sortOrder, setSortOrder] = useState<TSortOrder>('asc');
 
     const headerItems: IHeaderItem[] = [
-        {label: 'Task Name', value: 'task', width: 'w-4/6'},
-        {label: 'Date', value: 'date', width: 'w-2/6'},
+        {label: 'Task Name', value: 'task', width: 'w-[70%]'},
+        {label: 'Date', value: 'date', width: 'w-[30%]'},
     ]
 
     const handleSort = (newSortBy: TSortBy) => {
@@ -82,7 +82,7 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
 
 
     const renderList = () => (
-        <ul>
+        <ul className={'overflow-y-auto list-none'}>
             {listItems.map((item, index) => (
                 <li key={`${index}-${item.id}`}>
                     <Item item={item} onClick={onItemClick} selectedItemId={selectedItem?.id}/>
@@ -107,7 +107,10 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
     return (
         <>
             {renderHeader()}
-            {renderList()}
+            <div className="overflow-y-auto max-h-dvh">
+                {renderList()}
+            </div>
         </>
-    )
+    );
+
 }

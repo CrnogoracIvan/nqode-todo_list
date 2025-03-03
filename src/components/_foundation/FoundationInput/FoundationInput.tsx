@@ -14,7 +14,7 @@ export const FoundationInput = ({label, value, onChangeValue, rows = 1, type = '
         <input
             type={type}
             className={`${inputStyle} ${borderStyle}`}
-            placeholder={`Add ${label} ...`}
+            placeholder={`Enter ${label} ...`}
             value={value}
             onChange={(e) => onChangeValue(e.target.value)}
         />
@@ -22,7 +22,7 @@ export const FoundationInput = ({label, value, onChangeValue, rows = 1, type = '
     const renderMultipleLineInputContent = () => (
         <textarea
             className={inputStyle}
-            placeholder={`Add ${label} ...`}
+            placeholder={`Enter ${label} ...`}
             value={value}
             rows={rows}
             onChange={(e) => onChangeValue(e.target.value)}

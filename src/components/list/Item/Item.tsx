@@ -19,15 +19,16 @@ export const Item = ({item, onClick, selectedItemId}: IProps) => {
                 onClick(item)
             }}
         >
-            <p className={'ml-1 w-4/6'}>
+            <div className={'ml-1 w-[70%] overflow-hidden pr-6'}>
                 {item.title}
-            </p>
-            <div className={'ml-1 w-1/6 flex '}>
-                <p>
-                    {customizedDate}
+                <p className={'text-xs text-gray-400 truncate'}>
+                    {item.description}
                 </p>
             </div>
-            <div className={'w-1/6 flex justify-end items-center'}>
+            <div className={'ml-1 w-[20%] flex'}>
+                {customizedDate}
+            </div>
+            <div className={'w-[10%] flex justify-end items-center'}>
                 {item.status === 'COMPLETED' && <IoMdCheckmarkCircleOutline className="text-green-500 text-xl"/>}
                 <BiChevronRight/>
             </div>

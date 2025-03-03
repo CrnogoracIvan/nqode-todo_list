@@ -36,11 +36,11 @@ export const Auth = () => {
     }
 
     const renderError = () => (
-        <p className={'text-red-600 mb-2'}>Username or password are incorrect.</p>
+        <p className={'text-red-600 mb-2 text-center'}>Username or password are incorrect.</p>
     )
 
     const renderInputs = () => (
-        <div className='my-4 w-72'>
+        <div className='w-72 h-48'>
             <FoundationInput label={'username'} value={username} onChangeValue={handleUsernameChange} error={isError}/>
             <FoundationInput label={'password'} value={password} type={'password'} onChangeValue={handlePasswordChange}
                              error={isError}/>
@@ -51,11 +51,12 @@ export const Auth = () => {
 
     return (
         <div className="flex flex-col justify-center items-center bg-slate-50 rounded-2xl w-[40rem] h-[36rem]">
-            <h1 className={'text-3xl font-bold text-center'}>
-                Welcome in <br/>ToDo list
+            <h1 className={'text-3xl font-bold text-center mb-12'}>
+                Welcome to <br/>To-Do list
             </h1>
             {renderInputs()}
-            <FoundationButton type={'SUBMIT'} label={'Login'} onClick={handleLogin} disabled={buttonDisabled}/>
+            <FoundationButton type={'SUBMIT'} label={'Login'} onClick={handleLogin}
+                              disabled={buttonDisabled}/>
         </div>
     )
 }

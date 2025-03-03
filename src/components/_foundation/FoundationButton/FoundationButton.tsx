@@ -7,11 +7,11 @@ interface IProps {
 }
 
 export const FoundationButton = ({label, type, disabled = false, onClick, customClass}: IProps) => {
-    const globalStyle = 'w-48 rounded-md py-2 px-4 my-1 border border-transparent text-center text-sm text-white transition-all shadow-md active:shadow-none hover:shadow-lg'
+    const globalStyle = 'w-48 rounded-md py-2 px-4 my-1 border border-transparent text-center text-sm transition-all shadow-md active:shadow-none hover:shadow-lg'
     const disabledStyle = 'disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
-    const submitStyle = ' bg-amber-300 hover:bg-amber-500'
-    const deleteStyle = ' bg-red-500 hover:bg-red-700'
-    const successStyle = ' bg-green-500 hover:bg-green-700'
+    const submitStyle = ' bg-amber-300 hover:font-bold'
+    const deleteStyle = ' border-red-500 hover:bg-red-500 text-red-500 hover:text-white font-bold'
+    const successStyle = ' border-green-500 hover:bg-green-500 text-green-500 hover:text-white font-bold'
 
     const getStyleByType = () => {
         switch (type) {
