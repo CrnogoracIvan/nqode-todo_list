@@ -1,7 +1,10 @@
 {
   "name": "nqode-todolist",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ivan Crnogorac"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
