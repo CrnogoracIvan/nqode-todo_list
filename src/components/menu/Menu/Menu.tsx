@@ -43,7 +43,7 @@ export const Menu = ({onItemClick}: IProps) => {
     return (
         <div className='flex flex-col justify-between h-full '>
             <div>
-                <p className={'font-bold mb-6 text-2xl'}>Menu</p>
+                <p className={'font-bold mb-6 mt-1 text-2xl'}>Menu</p>
                 <ul>
                     {menuItems.map((item, i) => {
                         const activeItemStyle = item.id === activeItemId ? 'text-amber-300' : 'text-black'

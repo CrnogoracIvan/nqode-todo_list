@@ -93,7 +93,7 @@ export const ItemList = ({items, onItemClick, selectedItem}: IProps) => {
 
     const renderEmptyList = () => {
         return (
-            <div className={'flex flex-col items-center mt-40 h-full'}>
+            <div className={'flex flex-col items-center justify-center h-full'}>
                 <LuListTodo className={'text-8xl mb-4'}/>
                 <p>The list is empty</p>
             </div>

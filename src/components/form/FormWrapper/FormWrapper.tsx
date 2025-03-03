@@ -44,8 +44,8 @@ export const FormWrapper = ({
             case 'NONE':
             default:
                 return (
-                    <div className={'flex flex-col items-center mt-64 h-full'}>
-                        <LuSquareMousePointer className={'text-8xl mb-4'}/>
+                    <div className={'flex flex-col items-center justify-center h-full'}>
+                        <LuSquareMousePointer className={'text-8xl mt-12 mb-4'}/>
                         <p>No task selected</p>
                     </div>
 
@@ -55,7 +55,7 @@ export const FormWrapper = ({
 
     return (
         <>
-            <p className={'font-bold mb-6 text-2xl'}>{formTitle}</p>
+            <p className={'font-bold mb-6 mt-1 text-2xl'}>{formTitle}</p>
             {getForm()}
         </>
     );
