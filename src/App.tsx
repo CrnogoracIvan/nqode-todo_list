@@ -5,6 +5,7 @@ import {localStorageGetList, localStorageSetList} from "./utils.ts";
 import {FormWrapper} from "./components/form/FormWrapper/FormWrapper.tsx";
 import {ListWrapper} from "./components/list/ListWrapper/ListWrapper.tsx";
 import {getCoffeeService} from "./services/coffee.service.ts";
+import {Auth} from "./components/auth/Auth.tsx";
 
 function App() {
     const [activeForm, setActiveForm] = useState<TActiveForm>('NONE');
@@ -123,33 +124,41 @@ function App() {
         }
     }, [filteredList.length]);
 
+    const renderAuthForm = () => (
+        <Auth/>
+    )
+
+    const renderToDo = () => (
+        <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
+            <div className={'w-1/6 p-6'}>
+                <Menu onItemClick={handleMenuItemClick}/>
+            </div>
+            <div className={'w-3/6 p-6 bg-white'}>
+                <ListWrapper
+                    filteredList={filteredList}
+                    filteredBy={filteredBy}
+                    handleNewItemClick={handleNewTaskClick}
+                    handleItemClick={handleTaskClick}
+                    itemForEdit={taskForEdit}
+                />
+            </div>
+            <div className={'bg-slate-50 w-2/6 p-6'}>
+                <FormWrapper
+                    itemForEdit={taskForEdit}
+                    activeForm={activeForm}
+                    handleSubmit={handleNewTaskSubmit}
+                    handleSubmitEdit={handleTaskEdit}
+                    handleItemDelete={handleTaskDelete}
+                    handleItemCompleted={handleItemCompleted}
+                    dummyData={coffee}
+                />
+            </div>
+        </div>
+    )
+
     return (
         <div className='flex flex-row justify-center items-center w-full h-dvh'>
-            <div className='flex flex-row justify-center w-4/5 bg-slate-50 rounded-2xl overflow-hidden h-[95%] '>
-                <div className={'w-1/6 p-6'}>
-                    <Menu onItemClick={handleMenuItemClick}/>
-                </div>
-                <div className={'w-3/6 p-6 bg-white'}>
-                    <ListWrapper
-                        filteredList={filteredList}
-                        filteredBy={filteredBy}
-                        handleNewItemClick={handleNewTaskClick}
-                        handleItemClick={handleTaskClick}
-                        itemForEdit={taskForEdit}
-                    />
-                </div>
-                <div className={'bg-slate-50 w-2/6 p-6'}>
-                    <FormWrapper
-                        itemForEdit={taskForEdit}
-                        activeForm={activeForm}
-                        handleSubmit={handleNewTaskSubmit}
-                        handleSubmitEdit={handleTaskEdit}
-                        handleItemDelete={handleTaskDelete}
-                        handleItemCompleted={handleItemCompleted}
-                        dummyData={coffee}
-                    />
-                </div>
-            </div>
+            {renderAuthForm()}
         </div>
     )
 }

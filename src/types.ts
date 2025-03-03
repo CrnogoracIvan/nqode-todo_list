@@ -14,5 +14,11 @@ export interface IDummyDataItem {
     id: number
 }
 
+export interface IDummyUserData {
+    id: string;
+    name: string;
+    password?: string;
+}
+
 export type TMenuItem = 'ALL' | 'ACTIVE' | 'COMPLETED';
 export type TActiveForm = 'NONE' | 'NEW' | 'EDIT'

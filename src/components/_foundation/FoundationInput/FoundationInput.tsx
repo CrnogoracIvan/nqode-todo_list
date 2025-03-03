@@ -3,13 +3,17 @@ interface IProps {
     value: string;
     onChangeValue: (newValue: string) => void;
     rows?: number;
+    type?: 'text' | 'password';
+    error?: boolean;
 }
 
-export const FoundationInput = ({label, value, onChangeValue, rows = 1}: IProps) => {
+export const FoundationInput = ({label, value, onChangeValue, rows = 1, type = 'text', error = false}: IProps) => {
     const inputStyle = "w-full bg-transparent placeholder:text-slate-500 text-slate-700 text-sm border border-slate-400 rounded-md px-3 py-2 transition duration-300 ease focus:border-amber-300 focus:outline-none shadow-sm focus:shadow"
+    const errorInputStyle = 'border-red-400'
     const renderOneLineInputContent = () => (
         <input
-            className={inputStyle}
+            type={type}
+            className={`${inputStyle} ${error ? errorInputStyle : ''}`}
             placeholder={`Add ${label} ...`}
             value={value}
             onChange={(e) => onChangeValue(e.target.value)}
@@ -24,10 +28,11 @@ export const FoundationInput = ({label, value, onChangeValue, rows = 1}: IProps)
             onChange={(e) => onChangeValue(e.target.value)}
         />
     )
-    
+
     return (
-        <div className="w-full  min-w-[200px] py-2">
+        <div className="w-full min-w-[200px] py-2">
             {rows > 1 ? renderMultipleLineInputContent() : renderOneLineInputContent()}
         </div>
     )
 }
+

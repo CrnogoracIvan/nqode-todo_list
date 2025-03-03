@@ -1,4 +1,4 @@
-import {IDummyDataItem} from "../types.ts";
+import {IDummyDataItem, IDummyUserData} from "../types.ts";
 
 export const mockDummyData: IDummyDataItem[] = [
     {
@@ -23,4 +23,9 @@ export const mockDummyData: IDummyDataItem[] = [
         "image": "https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "id": 4
     },
+]
+
+export const mockUsers: IDummyUserData[] = [
+    {id: 'user1', name: 'Ivan', password: 'ivan123'},
+    {id: 'user2', name: 'Crnogorac', password: 'crnogorac123'},
 ]
